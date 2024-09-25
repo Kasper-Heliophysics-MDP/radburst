@@ -1,4 +1,5 @@
 site_name: draft docs
+site_url: https://Kasper-Heliophysics-MDP.github.io/draft
 
 nav:
   - Home: index.md
