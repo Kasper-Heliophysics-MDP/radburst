@@ -1,0 +1,25 @@
+site_name: draft docs
+
+nav:
+  - Home: index.md
+  - Code Reference:
+    - utils: code_reference/utils.md
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
