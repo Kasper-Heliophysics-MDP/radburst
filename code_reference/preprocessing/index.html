@@ -8,13 +8,11 @@
       
       
       
-        <link rel="canonical" href="https://Kasper-Heliophysics-MDP.github.io/draft/code_reference/utils/">
+        <link rel="canonical" href="https://Kasper-Heliophysics-MDP.github.io/draft/code_reference/preprocessing/">
       
       
-        <link rel="prev" href="../..">
+        <link rel="prev" href="../utils/">
       
-      
-        <link rel="next" href="../preprocessing/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +20,7 @@
     
     
       
-        <title>utils - draft docs</title>
+        <title>preprocessing - draft docs</title>
       
     
     
@@ -66,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#utilspy" class="md-skip">
+        <a href="#preprocessingpy" class="md-skip">
           Skip to content
         </a>
       
@@ -100,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              utils
+              preprocessing
             
           </span>
         </div>
@@ -190,7 +188,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+        <a href="../utils/" class="md-tabs__link">
           
   
   Code Reference
@@ -301,6 +299,27 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -317,7 +336,7 @@
           
   
   <span class="md-ellipsis">
-    utils
+    preprocessing
   </span>
   
 
@@ -328,7 +347,7 @@
         
   
   <span class="md-ellipsis">
-    utils
+    preprocessing
   </span>
   
 
@@ -350,27 +369,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#draft.utils.utils" class="md-nav__link">
+  <a href="#draft.utils.preprocessing" class="md-nav__link">
     <span class="md-ellipsis">
-      utils
+      preprocessing
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#draft.utils.utils.load_fits_file" class="md-nav__link">
+  <a href="#draft.utils.preprocessing.standardize_rows" class="md-nav__link">
     <span class="md-ellipsis">
-      load_fits_file
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#draft.utils.utils.plot_spectrogram" class="md-nav__link">
-    <span class="md-ellipsis">
-      plot_spectrogram
+      standardize_rows
     </span>
   </a>
   
@@ -380,27 +390,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../preprocessing/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    preprocessing
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -440,27 +429,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#draft.utils.utils" class="md-nav__link">
+  <a href="#draft.utils.preprocessing" class="md-nav__link">
     <span class="md-ellipsis">
-      utils
+      preprocessing
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#draft.utils.utils.load_fits_file" class="md-nav__link">
+  <a href="#draft.utils.preprocessing.standardize_rows" class="md-nav__link">
     <span class="md-ellipsis">
-      load_fits_file
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#draft.utils.utils.plot_spectrogram" class="md-nav__link">
-    <span class="md-ellipsis">
-      plot_spectrogram
+      standardize_rows
     </span>
   </a>
   
@@ -481,14 +461,14 @@
                   
 
 
-<h1 id="utilspy">utils.py</h1>
+<h1 id="preprocessingpy">preprocessing.py</h1>
 
 
 <div class="doc doc-object doc-module">
 
 
 
-<a id="draft.utils.utils"></a>
+<a id="draft.utils.preprocessing"></a>
     <div class="doc doc-contents first">
 
 
@@ -506,35 +486,25 @@
 <div class="doc doc-object doc-function">
 
 
-<h2 id="draft.utils.utils.load_fits_file" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">load_fits_file</span><span class="p">(</span><span class="n">fits_file_path</span><span class="p">,</span> <span class="n">num_freq_chans_to_remove</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span></code>
+<h2 id="draft.utils.preprocessing.standardize_rows" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">standardize_rows</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span></code>
 
 </h2>
 
 
     <div class="doc doc-contents ">
 
-        <p>Load spectrogram from a FITS into a numpy array.</p>
+        <p>Standardize each row by subtracting the mean and dividing by the standard deviation.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
         <li class="doc-section-item field-body">
-          <b><code>fits_file_path</code></b>
-              (<code>str</code>)
+          <b><code>arr</code></b>
+              (<code><span title="numpy.ndarray">ndarray</span></code>)
           –
           <div class="doc-md-description">
-            <p>Path to .fits file containing the spectrogram data.</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-          <b><code>num_freq_chans_to_remove</code></b>
-              (<code>int</code>, default:
-                  <code>10</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>Optional parameter to remove low frequency channels with bad signal.</p>
+            <p>2D array to standardize.</p>
           </div>
         </li>
     </ul>
@@ -545,14 +515,15 @@
         <li class="doc-section-item field-body">
           –
           <div class="doc-md-description">
-            <p>np.ndarray: Array</p>
+            <p>np.ndarray: Row-standardized 2D array.</p>
           </div>
         </li>
     </ul>
 
             <details class="quote">
-              <summary>Source code in <code>draft/utils/utils.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+              <summary>Source code in <code>draft/utils/preprocessing.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
 <span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
 <span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
 <span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
@@ -564,83 +535,28 @@
 <span class="normal"><a href="#__codelineno-0-13">13</a></span>
 <span class="normal"><a href="#__codelineno-0-14">14</a></span>
 <span class="normal"><a href="#__codelineno-0-15">15</a></span>
-<span class="normal"><a href="#__codelineno-0-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="k">def</span> <span class="nf">load_fits_file</span><span class="p">(</span><span class="n">fits_file_path</span><span class="p">,</span> <span class="n">num_freq_chans_to_remove</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Load spectrogram from a FITS into a numpy array.</span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#__codelineno-0-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="k">def</span> <span class="nf">standardize_rows</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="sd">    Standardize each row by subtracting the mean and dividing by the standard deviation.</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="sd">        fits_file_path (str): Path to .fits file containing the spectrogram data.</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="sd">        num_freq_chans_to_remove (int): Optional parameter to remove low frequency channels with bad signal.</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="sd">    Returns:</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="sd">        np.ndarray: Array </span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a>    <span class="n">fits_full_data</span> <span class="o">=</span> <span class="n">astropy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fits_file_path</span><span class="p">)</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a>    <span class="n">fits_array</span> <span class="o">=</span> <span class="n">fits_full_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="o">-</span><span class="n">num_freq_chans_to_remove</span><span class="p">,:]</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a>    <span class="k">return</span> <span class="n">fits_array</span>
-</span></code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h2 id="draft.utils.utils.plot_spectrogram" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">plot_spectrogram</span><span class="p">(</span><span class="n">spect</span><span class="p">)</span></code>
-
-</h2>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Plot a spectrogram array.</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-          <b><code>spect</code></b>
-              (<code><span title="np.ndarray">ndarray</span></code>)
-          –
-          <div class="doc-md-description">
-            <p>Array of spectrogram data.</p>
-          </div>
-        </li>
-    </ul>
-
-
-<p><span class="doc-section-title">Returns:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-          –
-          <div class="doc-md-description">
-            <p>None</p>
-          </div>
-        </li>
-    </ul>
-
-            <details class="quote">
-              <summary>Source code in <code>draft/utils/utils.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-19">19</a></span>
-<span class="normal"><a href="#__codelineno-0-20">20</a></span>
-<span class="normal"><a href="#__codelineno-0-21">21</a></span>
-<span class="normal"><a href="#__codelineno-0-22">22</a></span>
-<span class="normal"><a href="#__codelineno-0-23">23</a></span>
-<span class="normal"><a href="#__codelineno-0-24">24</a></span>
-<span class="normal"><a href="#__codelineno-0-25">25</a></span>
-<span class="normal"><a href="#__codelineno-0-26">26</a></span>
-<span class="normal"><a href="#__codelineno-0-27">27</a></span>
-<span class="normal"><a href="#__codelineno-0-28">28</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="k">def</span> <span class="nf">plot_spectrogram</span><span class="p">(</span><span class="n">spect</span><span class="p">):</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot a spectrogram array.</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="sd">        spect (np.ndarray): Array of spectrogram data.</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="sd">    Returns:</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="sd">        None</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a>    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">spect</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>    
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="sd">        arr (np.ndarray): 2D array to standardize.</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="sd">    Returns:</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="sd">        np.ndarray: Row-standardized 2D array.</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13"></a>    <span class="n">mean_per_row</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a>    <span class="n">std_per_row</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a>    <span class="c1"># Prevent divide by 0 errors</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a>    <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-8</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a>    <span class="n">std_per_row</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">std_per_row</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">)</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">arr</span> <span class="o">-</span> <span class="n">mean_per_row</span><span class="p">)</span> <span class="o">/</span> <span class="n">std_per_row</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
