@@ -1,27 +1,28 @@
-def sum_(a: int, b: int) -> int:
-    """Calculate the sum of two integers.
+import matplotlib.pyplot as plt
+import astropy
+
+def load_fits_file(fits_file_path, num_freq_chans_to_remove=10):
+    """Load spectrogram from a FITS into a numpy array.
 
     Args:
-        a (int): first argument
-        b (int): second argument
+        fits_file_path (str): Path to .fits file containing the spectrogram data.
+        num_freq_chans_to_remove (int): Optional parameter to remove low frequency channels with bad signal.
 
     Returns:
-        int: sum of two arguments
-
-    Examples:
-        >>> print()
+        np.ndarray: Array 
     """
-    return a + b
+    fits_full_data = astropy.io.fits.open(fits_file_path)
+    fits_array = fits_full_data[0].data[:-num_freq_chans_to_remove,:]
+    return fits_array
 
 
-def product_(a: int, b: int) -> int:
-    """Calculate the product of two integers.
+def plot_spectrogram(spect):
+    """Plot a spectrogram array.
 
     Args:
-        a (int): first argument
-        b (int): second argument
+        spect (np.ndarray): Array of spectrogram data.
 
     Returns:
-        int: product of two arguments
+        None
     """
-    return a * b
+    plt.imshow(spect, aspect='auto')    

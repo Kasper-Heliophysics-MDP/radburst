@@ -5,6 +5,8 @@ nav:
   - Home: index.md
   - Code Reference:
     - utils: code_reference/utils.md
+    - preprocessing: code_reference/preprocessing.md
+
 
 theme:
   name: material
