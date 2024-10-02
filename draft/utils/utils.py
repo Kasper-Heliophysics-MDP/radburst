@@ -1,4 +1,4 @@
-def sum(a: int, b: int) -> int:
+def sum_(a: int, b: int) -> int:
     """Calculate the sum of two integers.
 
     Args:
@@ -7,11 +7,14 @@ def sum(a: int, b: int) -> int:
 
     Returns:
         int: sum of two arguments
+
+    Examples:
+        >>> print()
     """
     return a + b
 
 
-def product(a: int, b: int) -> int:
+def product_(a: int, b: int) -> int:
     """Calculate the product of two integers.
 
     Args:
