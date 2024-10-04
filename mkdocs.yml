@@ -1,17 +1,42 @@
-site_name: draft docs
-site_url: https://Kasper-Heliophysics-MDP.github.io/draft
+site_name: RadBurst Documentation
+site_url: https://Kasper-Heliophysics-MDP.github.io/radburst
 
 nav:
   - Home: index.md
+  - Developer Guide:
+    - Installation: guides/installation.md
+    - Development Workflow: guides/dev_workflow.md
+    - Updating Documentation: guides/update_docs.md
   - Code Reference:
-    - utils: code_reference/utils.md
-    - preprocessing: code_reference/preprocessing.md
-
+    - code_reference/index.md
+    - Utilities: 
+      - code_reference/utils/utils.md
+      - code_reference/utils/preprocessing.md
+    - Detection: 
+      - code_reference/detection/detection.md
+    - Classification: 
+      - code_reference/classification/classification.md
+  - Examples: examples/examples.md
 
 theme:
   name: material
   features:
     - navigation.tabs
+    - navigation.sections
+    - navigation.top
+  palette:
+    - scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    - scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -30,3 +55,20 @@ plugins:
           options:
             docstring_style: google
             docstring_section_style: list
+            show_root_heading: true
+            show_if_no_docstring: true
+            inherited_members: true
+            members_order: source
+            separate_signature: true
+            unwrap_annotated: true
+            merge_init_into_class: true
+            docstring_section_style: spacy
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+
+
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/yourusername/yourrepository

@@ -2,10 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://Kasper-Heliophysics-MDP.github.io/draft/</loc>
-         <lastmod>2024-09-25</lastmod>
+         <lastmod>2024-10-02</lastmod>
+    </url>
+    <url>
+         <loc>https://Kasper-Heliophysics-MDP.github.io/draft/code_reference/preprocessing/</loc>
+         <lastmod>2024-10-02</lastmod>
     </url>
     <url>
          <loc>https://Kasper-Heliophysics-MDP.github.io/draft/code_reference/utils/</loc>
-         <lastmod>2024-09-25</lastmod>
+         <lastmod>2024-10-02</lastmod>
     </url>
 </urlset>

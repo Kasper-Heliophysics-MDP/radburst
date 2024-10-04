@@ -5,7 +5,7 @@ def read_requirements(file_name):
         return [line.strip() for line in f if line and not line.startswith("#")]
 
 setup(
-    name='draft',
+    name='radburst',
     version='0.1',
     packages=find_packages(),
     install_requires=read_requirements('requirements.txt'),

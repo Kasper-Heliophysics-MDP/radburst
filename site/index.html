@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.37">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
     
     
       
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome-to-draft-docs" class="md-skip">
+        <a href="#welcome-to-the-docs" class="md-skip">
           Skip to content
         </a>
       
@@ -285,18 +285,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#about" class="md-nav__link">
+  <a href="#installation" class="md-nav__link">
     <span class="md-ellipsis">
-      about
+      Installation
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
+  <a href="#updating-documentation" class="md-nav__link">
     <span class="md-ellipsis">
-      installation
+      Updating Documentation
     </span>
   </a>
   
@@ -305,7 +305,7 @@
         <li class="md-nav__item">
   <a href="#repository-structure" class="md-nav__link">
     <span class="md-ellipsis">
-      repository structure
+      Repository Structure
     </span>
   </a>
   
@@ -378,6 +378,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="code_reference/preprocessing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    preprocessing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -412,18 +433,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#about" class="md-nav__link">
+  <a href="#installation" class="md-nav__link">
     <span class="md-ellipsis">
-      about
+      Installation
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
+  <a href="#updating-documentation" class="md-nav__link">
     <span class="md-ellipsis">
-      installation
+      Updating Documentation
     </span>
   </a>
   
@@ -432,7 +453,7 @@
         <li class="md-nav__item">
   <a href="#repository-structure" class="md-nav__link">
     <span class="md-ellipsis">
-      repository structure
+      Repository Structure
     </span>
   </a>
   
@@ -453,22 +474,61 @@
                   
 
 
-<h1 id="welcome-to-draft-docs">welcome to draft docs</h1>
-<h2 id="about">about</h2>
-<p>info about project</p>
-<h2 id="installation">installation</h2>
+<h1 id="welcome-to-the-docs">Welcome to the docs!</h1>
+<h2 id="installation">Installation</h2>
 <ol>
-<li>clone</li>
-<li>venv</li>
+<li><strong>Clone the GitHub repository:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Kasper-Heliophysics-MDP/draft.git
+</span></code></pre></div></li>
+<li><strong>Move into the project directory:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>draft
+</span></code></pre></div></li>
+<li><strong>Set up a virtual enviroment (to isolate dependencies):</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv<span class="w"> </span>.
+</span></code></pre></div></li>
+<li><strong>Activate the virtual enviroment:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>.<span class="w"> </span>.venv/bin/activate
+</span></code></pre></div></li>
+<li><strong>Install the project and dependencies:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="w"> </span>
+</span></code></pre></div>
+This installs the project as a package (in "editable" mode), enabling you to import it throughout the codebase while reflecting changes made without needing to reinstall.</li>
 </ol>
-<h2 id="repository-structure">repository structure</h2>
-<div class="language-text highlight"><pre><span></span><code>docs/                   # all documentation (.md files)
-site/                   # static site build from docs/ using mkdocs
-draft/
-    detection/
-        ml_detection/
-    classification/
-requirements.txt
+<h2 id="updating-documentation">Updating Documentation</h2>
+<p>This documentation site is built using <a href="https://www.mkdocs.org/">MkDocs</a>. MkDocs reads the <a href="https://www.markdownguide.org/">Markdown</a> (.md) files from the <code>docs/</code> folder and configures the site according to the settings defined in <code>mkdocs.yml</code>.</p>
+<ol>
+<li>
+<p><strong>Edit Documentation Files:</strong>
+    Modify <code>.md</code> files in the <code>docs/</code> directory.</p>
+</li>
+<li>
+<p><strong>Preview Changes Locally:</strong>
+    To preview your changes, run the following command from the project directory:
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mkdocs<span class="w"> </span>serve
+</span></code></pre></div>
+    This command will provide a link to view the current documentation in your web browser.</p>
+</li>
+<li>
+<p><strong>Build the Static Site:</strong>
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>mkdocs<span class="w"> </span>build
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Deploy the Changes:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>mkdocs<span class="w"> </span>gh-deploy
+</span></code></pre></div>
+This command will build the docs, commit them to the <code>gh-pages</code> branch and push the <code>gh-branch</code> pages branch to GitHub.</p>
+</li>
+</ol>
+<h2 id="repository-structure">Repository Structure</h2>
+<div class="language-text highlight"><pre><span></span><code>docs/                   # Documentation (.md files)
+site/                   # Documentation website
+draft/                  
+    detection/          # Burst detection work
+    classification/     # Burst classification work
+    utils/              # Common utility functions (e.g. load, preprocess, etc.)
+requirements.txt        # Project dependencies (read by setup.py when &quot;pip install -e .&quot; is run)
+mkdocs.yml              # Documentation site settings
 </code></pre></div>
 
 
@@ -519,7 +579,7 @@ requirements.txt
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs"], "search": "assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.d6f25eb3.min.js"></script>
+      <script src="assets/javascripts/bundle.525ec568.min.js"></script>
       
     
   </body>
