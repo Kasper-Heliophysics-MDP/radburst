@@ -2,7 +2,7 @@
 
 This repository contains software developed for the MDP Heliophysics Research Team. We are focused on detecting and classifying solar radio bursts using spectrogram data collected by our LWA antennas.
 
-For a comprehensive guide to this codebase, please refer to the [documentation]().
+For a comprehensive guide to this codebase, please refer to the [documentation](https://kasper-heliophysics-mdp.github.io/radburst/).
 
 - [Installation](#installation)
 - [Repository Structure](#repository-structure)

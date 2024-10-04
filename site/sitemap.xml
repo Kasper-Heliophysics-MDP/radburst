@@ -1,15 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://Kasper-Heliophysics-MDP.github.io/draft/</loc>
-         <lastmod>2024-10-02</lastmod>
+         <loc>https://Kasper-Heliophysics-MDP.github.io/radburst/</loc>
+         <lastmod>2024-10-04</lastmod>
     </url>
     <url>
-         <loc>https://Kasper-Heliophysics-MDP.github.io/draft/code_reference/preprocessing/</loc>
-         <lastmod>2024-10-02</lastmod>
+         <loc>https://Kasper-Heliophysics-MDP.github.io/radburst/code_reference/</loc>
+         <lastmod>2024-10-04</lastmod>
     </url>
     <url>
-         <loc>https://Kasper-Heliophysics-MDP.github.io/draft/code_reference/utils/</loc>
-         <lastmod>2024-10-02</lastmod>
+         <loc>https://Kasper-Heliophysics-MDP.github.io/radburst/code_reference/classification/classification/</loc>
+         <lastmod>2024-10-04</lastmod>
+    </url>
+    <url>
+         <loc>https://Kasper-Heliophysics-MDP.github.io/radburst/code_reference/detection/detection/</loc>
+         <lastmod>2024-10-04</lastmod>
+    </url>
+    <url>
+         <loc>https://Kasper-Heliophysics-MDP.github.io/radburst/code_reference/utils/</loc>
+         <lastmod>2024-10-04</lastmod>
+    </url>
+    <url>
+         <loc>https://Kasper-Heliophysics-MDP.github.io/radburst/code_reference/utils/preprocessing/</loc>
+         <lastmod>2024-10-04</lastmod>
+    </url>
+    <url>
+         <loc>https://Kasper-Heliophysics-MDP.github.io/radburst/code_reference/utils/utils/</loc>
+         <lastmod>2024-10-04</lastmod>
+    </url>
+    <url>
+         <loc>https://Kasper-Heliophysics-MDP.github.io/radburst/examples/examples/</loc>
+         <lastmod>2024-10-04</lastmod>
+    </url>
+    <url>
+         <loc>https://Kasper-Heliophysics-MDP.github.io/radburst/guides/dev_workflow/</loc>
+         <lastmod>2024-10-04</lastmod>
+    </url>
+    <url>
+         <loc>https://Kasper-Heliophysics-MDP.github.io/radburst/guides/installation/</loc>
+         <lastmod>2024-10-04</lastmod>
+    </url>
+    <url>
+         <loc>https://Kasper-Heliophysics-MDP.github.io/radburst/guides/update_docs/</loc>
+         <lastmod>2024-10-04</lastmod>
     </url>
 </urlset>

@@ -8,9 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://Kasper-Heliophysics-MDP.github.io/radburst/code_reference/utils/">
+        <link rel="canonical" href="https://Kasper-Heliophysics-MDP.github.io/radburst/guides/update_docs/">
       
       
+        <link rel="prev" href="../dev_workflow/">
+      
+      
+        <link rel="next" href="../../code_reference/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Index - RadBurst Documentation</title>
+        <title>Updating Documentation - RadBurst Documentation</title>
       
     
     
@@ -71,6 +75,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#updating-documentation" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -101,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              Updating Documentation
             
           </span>
         </div>
@@ -211,11 +220,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../guides/installation/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../installation/" class="md-tabs__link">
           
   
   Developer Guide
@@ -233,7 +244,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../../code_reference/" class="md-tabs__link">
           
   
   Code Reference
@@ -318,25 +329,30 @@
       
   
   
+    
   
   
+  
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -347,7 +363,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Developer Guide
@@ -361,7 +377,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/installation/" class="md-nav__link">
+      <a href="../installation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -382,7 +398,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/dev_workflow/" class="md-nav__link">
+      <a href="../dev_workflow/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -400,10 +416,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../guides/update_docs/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -412,6 +437,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -471,7 +497,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../code_reference/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -532,7 +558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utils/" class="md-nav__link">
+      <a href="../../code_reference/utils/utils/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -553,7 +579,7 @@
   
   
     <li class="md-nav__item">
-      <a href="preprocessing/" class="md-nav__link">
+      <a href="../../code_reference/utils/preprocessing/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -622,7 +648,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../detection/detection/" class="md-nav__link">
+      <a href="../../code_reference/detection/detection/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -691,7 +717,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classification/classification/" class="md-nav__link">
+      <a href="../../code_reference/classification/classification/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -757,6 +783,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -771,9 +799,32 @@
                   
 
 
-  <h1>Index</h1>
-
-<p>overview</p>
+<h1 id="updating-documentation">Updating Documentation</h1>
+<p>This documentation site is built using <a href="https://www.mkdocs.org/">MkDocs</a>. MkDocs reads the <a href="https://www.markdownguide.org/">Markdown</a> (.md) files from the <code>docs/</code> folder and configures the site according to the settings defined in <code>mkdocs.yml</code>.</p>
+<ol>
+<li>
+<p><strong>Edit Documentation Files:</strong>
+    Modify <code>.md</code> files in the <code>docs/</code> directory.</p>
+</li>
+<li>
+<p><strong>Preview Changes Locally:</strong>
+    To preview your changes, run the following command from the project directory:
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mkdocs<span class="w"> </span>serve
+</span></code></pre></div>
+    This command will provide a link to view the current documentation in your web browser.</p>
+</li>
+<li>
+<p><strong>Build the Static Site:</strong>
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mkdocs<span class="w"> </span>build
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Deploy the Changes:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>mkdocs<span class="w"> </span>gh-deploy
+</span></code></pre></div>
+This command will build the docs, commit them to the <code>gh-pages</code> branch and push the <code>gh-branch</code> pages branch to GitHub.</p>
+</li>
+</ol>
 
 
 
