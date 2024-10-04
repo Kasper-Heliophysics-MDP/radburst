@@ -8,9 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://Kasper-Heliophysics-MDP.github.io/radburst/code_reference/utils/">
+        <link rel="canonical" href="https://Kasper-Heliophysics-MDP.github.io/radburst/guides/installation/">
       
       
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../dev_workflow/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Index - RadBurst Documentation</title>
+        <title>Installation - RadBurst Documentation</title>
       
     
     
@@ -71,6 +75,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#installation" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -101,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              Installation
             
           </span>
         </div>
@@ -211,11 +220,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../guides/installation/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   Developer Guide
@@ -233,7 +244,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../../code_reference/" class="md-tabs__link">
           
   
   Code Reference
@@ -318,25 +329,30 @@
       
   
   
+    
   
   
+  
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -347,7 +363,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Developer Guide
@@ -358,10 +374,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../guides/installation/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -370,6 +395,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -382,7 +408,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/dev_workflow/" class="md-nav__link">
+      <a href="../dev_workflow/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -403,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/update_docs/" class="md-nav__link">
+      <a href="../update_docs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -471,7 +497,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../code_reference/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -532,7 +558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utils/" class="md-nav__link">
+      <a href="../../code_reference/utils/utils/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -553,7 +579,7 @@
   
   
     <li class="md-nav__item">
-      <a href="preprocessing/" class="md-nav__link">
+      <a href="../../code_reference/utils/preprocessing/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -622,7 +648,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../detection/detection/" class="md-nav__link">
+      <a href="../../code_reference/detection/detection/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -691,7 +717,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classification/classification/" class="md-nav__link">
+      <a href="../../code_reference/classification/classification/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -757,6 +783,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -771,9 +799,25 @@
                   
 
 
-  <h1>Index</h1>
-
-<p>overview</p>
+<h1 id="installation">Installation</h1>
+<ol>
+<li><strong>Clone the GitHub repository:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Kasper-Heliophysics-MDP/radburst.git
+</span></code></pre></div></li>
+<li><strong>Move into the project directory:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>draft
+</span></code></pre></div></li>
+<li><strong>Set up a virtual enviroment (to isolate dependencies):</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv<span class="w"> </span>.
+</span></code></pre></div></li>
+<li><strong>Activate the virtual enviroment:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>.<span class="w"> </span>.venv/bin/activate
+</span></code></pre></div></li>
+<li><strong>Install the project and dependencies:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="w"> </span>
+</span></code></pre></div>
+This installs the project as a package (in "editable" mode), enabling you to import it throughout the codebase while reflecting changes made without needing to reinstall.</li>
+</ol>
 
 
 
