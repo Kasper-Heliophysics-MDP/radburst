@@ -1,6 +1,10 @@
 site_name: RadBurst Documentation
 site_url: https://Kasper-Heliophysics-MDP.github.io/radburst
 
+# Repository
+repo_name: Kasper-Heliophysics-MDP/radburst
+repo_url: https://github.com/Kasper-Heliophysics-MDP/radburst
+
 nav:
   - Home: index.md
   - Developer Guide:
@@ -26,16 +30,16 @@ theme:
     - navigation.top
   palette:
     - scheme: slate
-      primary: blue
-      accent: blue
+      primary: orange
+      accent: orange
       toggle:
-        icon: material/brightness-4
+        icon: material/lightbulb-outline
         name: Switch to light mode
     - scheme: default
-      primary: blue
-      accent: blue
+      primary: orange
+      accent: orange
       toggle:
-        icon: material/brightness-7
+        icon: material/lightbulb
         name: Switch to dark mode
 
 markdown_extensions:
@@ -66,9 +70,3 @@ plugins:
             show_symbol_type_heading: true
             show_symbol_type_toc: true
 
-
-
-extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/yourusername/yourrepository
