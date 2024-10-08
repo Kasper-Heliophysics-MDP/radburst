@@ -11,11 +11,11 @@ Below are links to key sections of the documentation:
 - **[Updating Documentation](guides/update_docs.md)**: Instructions for maintaining and updating documentation.
 
 ## Code Reference
-
 - **[Reference Overview](code_reference/index.md)**: 
 - **[Utilities](code_reference/utils/utils.md)**: 
 - **[Detection](code_reference/detection/detection.md)**: 
 - **[Classification](code_reference/classification/classification.md)**: 
+
 
 ## Examples
 
@@ -23,14 +23,18 @@ Below are links to key sections of the documentation:
 
 
 ## Repository Structure
-
+    
+    data/                   # Explanations and links to datasets and sample data
     docs/                   # Documentation (.md files)
-    site/                   # Documentation website
-    draft/                  
-        detection/          # Burst detection work
-        classification/     # Burst classification work
+    notebooks/              # Jupyter notebooks
+        exploration/        # Notebooks for data exploration, testing ideas and analysis        
+        evaluation/         # Notebooks evaluating models and algorithms
+        examples/           # Notebooks demonstrating how to use code
+    radburst/               # Main directory for code developement
+        detection/          # Burst detection code
+        classification/     # Burst classification code
         utils/              # Common utility functions (e.g. load, preprocess, etc.)
     requirements.txt        # Project dependencies (read by setup.py when "pip install -e ." is run)
-    mkdocs.yml              # Documentation site settings
+    mkdocs.yml              # Configuration for MkDocs documentation
     
 

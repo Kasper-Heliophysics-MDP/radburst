@@ -34,12 +34,16 @@ This installs the project as a package (in "editable" mode), enabling you to imp
 
 
 ## Repository Structure
-
+    
+    data/                   # Explanations and links to datasets and sample data
     docs/                   # Documentation (.md files)
-    site/                   # Documentation website
-    radburst/                  
-        detection/          # Burst detection work
-        classification/     # Burst classification work
+    notebooks/              # Jupyter notebooks
+        exploration/        # Notebooks for data exploration, testing ideas and analysis        
+        evaluation/         # Notebooks evaluating models and algorithms
+        examples/           # Notebooks demonstrating how to use code
+    radburst/               # Main directory for code developement
+        detection/          # Burst detection code
+        classification/     # Burst classification code
         utils/              # Common utility functions (e.g. load, preprocess, etc.)
     requirements.txt        # Project dependencies (read by setup.py when "pip install -e ." is run)
-    mkdocs.yml              # Documentation site settings
+    mkdocs.yml              # Configuration for MkDocs documentation

@@ -1,0 +1,2 @@
+- Explain datasets here (collected data, online ecallisto, etc) including where/how to download them
+- Include folder here for sample data w/ labels to demonstrate or test functions (preprocessing, detection, etc)
