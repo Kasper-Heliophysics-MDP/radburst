@@ -452,6 +452,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Updating Documentation
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -461,6 +472,79 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-edit-documentation-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Edit Documentation Files
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-code-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Code Reference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-updating-mkdocsyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Updating mkdocs.yml
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-preview-changes-locally" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Preview Changes Locally
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-build-the-documentation-site-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Build the Documentation Site (Optional)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-deploy-the-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Deploy the Changes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -810,6 +894,68 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-edit-documentation-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Edit Documentation Files
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-code-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Code Reference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-updating-mkdocsyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Updating mkdocs.yml
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-preview-changes-locally" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Preview Changes Locally
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-build-the-documentation-site-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Build the Documentation Site (Optional)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-deploy-the-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Deploy the Changes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -827,31 +973,83 @@
 
 
 <h1 id="updating-documentation">Updating Documentation</h1>
-<p>This documentation site is built using <a href="https://www.mkdocs.org/">MkDocs</a>. MkDocs reads the <a href="https://www.markdownguide.org/">Markdown</a> (.md) files from the <code>docs/</code> folder and configures the site according to the settings defined in <code>mkdocs.yml</code>.</p>
-<ol>
+<p>This guide provides instructions for how to update and maintain project documentation. These steps explain how to make changes, preview them and deploy updates to the documentation site.</p>
+<p>The documentation site is built using <a href="https://www.mkdocs.org/">MkDocs</a>. MkDocs reads the <a href="https://www.markdownguide.org/">Markdown</a> (.md) files from the <code>docs/</code> folder and configures the site according to the settings defined in <code>mkdocs.yml</code>.</p>
+<h2 id="1-edit-documentation-files">1. Edit Documentation Files</h2>
+<ul>
+<li>Modify <code>.md</code> files in the <code>docs/</code> directory.</li>
+<li>For Markdown (<code>.md</code>) syntax, refer to the <a href="https://www.markdownguide.org/">Markdown Guide</a></li>
+</ul>
+<h2 id="2-code-reference">2. Code Reference</h2>
+<ul>
+<li>To automatically generate documentation from your code's doctrings (in modules, functions or classes), use the following syntax in your Markdown files:
+<div class="language-markdown highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>::: radburst.utils.preprocessing
+</span></code></pre></div></li>
+<li>The line above will read the docstrings in <code>preprocessing.py</code> and create structured documentation that explains the functions, their parameters, and return values.</li>
 <li>
-<p><strong>Edit Documentation Files:</strong>
-    Modify <code>.md</code> files in the <code>docs/</code> directory.</p>
-</li>
-<li>
-<p><strong>Preview Changes Locally:</strong>
-    To preview your changes, run the following command from the project directory:
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mkdocs<span class="w"> </span>serve
+<p>The current <code>mkdocs.yml</code> is configured to use Google-style dosctrings. Here's an example of a Google-style docstring for a function:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span> <span class="nf">example_function</span><span class="p">(</span><span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">):</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Short description of the function.</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="sd">    Longer description that provides more detail about what the function does,</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="sd">    how it operates, and any important considerations. This can include</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="sd">    information about the parameters, return values, and any exceptions that</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="sd">    might be raised.</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="sd">    Args:</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="sd">        param1 (int): The first parameter to be processed.</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="sd">        param2 (float): The second parameter to be processed.</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="sd">    Returns:</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="sd">        bool: True if the operation is successful, False otherwise.</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="k">return</span> <span class="kc">True</span>
 </span></code></pre></div>
-    This command will provide a link to view the current documentation in your web browser.</p>
 </li>
+</ul>
+<h2 id="3-updating-mkdocsyml">3. Updating <code>mkdocs.yml</code></h2>
+<ul>
+<li>The <code>mkdocs.yml</code> file in the root directory configures the documentation site. Changes to documentation files/structure will need to be reflected here to make sure the site is rendered correctly. </li>
 <li>
-<p><strong>Build the Static Site:</strong>
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mkdocs<span class="w"> </span>build
-</span></code></pre></div></p>
-</li>
-<li>
-<p><strong>Deploy the Changes:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>mkdocs<span class="w"> </span>gh-deploy
+<p>Here is a preview of what it looks like:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">site_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RadBurst Documentation</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">site_url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://Kasper-Heliophysics-MDP.github.io/radburst</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nt">repo_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Kasper-Heliophysics-MDP/radburst</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nt">repo_url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/Kasper-Heliophysics-MDP/radburst</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nt">nav</span><span class="p">:</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Home</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index.md</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Developer Guide</span><span class="p">:</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Installation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">guides/installation.md</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Development Workflow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">guides/dev_workflow.md</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Updating Documentation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">guides/update_docs.md</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Code Reference</span><span class="p">:</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">code_reference/index.md</span>
 </span></code></pre></div>
-This command will build the docs, commit them to the <code>gh-pages</code> branch and push the <code>gh-branch</code> pages branch to GitHub.</p>
 </li>
-</ol>
+</ul>
+<h2 id="4-preview-changes-locally">4. Preview Changes Locally</h2>
+<ul>
+<li>To preview your changes, run the following command from the project directory:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>mkdocs<span class="w"> </span>serve
+</span></code></pre></div></li>
+<li>This will provide a link to view the current documentation in your web browser.</li>
+</ul>
+<h2 id="5-build-the-documentation-site-optional">5. Build the Documentation Site (Optional)</h2>
+<ul>
+<li>To generate the static site files without deploying, run:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mkdocs<span class="w"> </span>build
+</span></code></pre></div></li>
+<li>This will create site files in <code>site/</code>. Note <code>site/</code> is in <code>.gitignore</code> and this build command is automatically run in the following deployment step. Therefore, if changes look good after previewing with <code>mkdocs serve</code>, building is not required.</li>
+</ul>
+<h2 id="6-deploy-the-changes">6. Deploy the Changes</h2>
+<ul>
+<li>Once you're satisfied with your changes, they can be deployed:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mkdocs<span class="w"> </span>gh-deploy
+</span></code></pre></div></li>
+<li>This will build the documentation (if not already built), commit changes to the <code>gh-pages</code> branch and push the <code>gh-pages</code> branch to GitHub. The GitHub repo will host the documentation using <code>gh-pages</code>.</li>
+</ul>
 
 
 
