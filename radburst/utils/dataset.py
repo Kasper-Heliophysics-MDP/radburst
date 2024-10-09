@@ -6,10 +6,14 @@ class Dataset:
     """Dataset class to manage loading, storing and processing data."""
     
     def __init__(self, data_dir):
-        """Intialization of dataset.
+        """Intialize the dataset.
         
         Args:
-            data_dir (str): Root directory of dataset
+            data_dir (str): The root directory containing the FITS data files.
+
+        Attributes:
+            data_dir (str): The directory path for the dataset.
+            data (list): List that stores the loaded data arrays from FITS files.
         """
         self.data_dir = data_dir
         self.data = []
@@ -52,7 +56,7 @@ class Dataset:
         """Return element at given index"""
         return self.data[idx]
     
-    
+
     def __len__(self):
         """Return length of dataset"""
         return len(self.data)

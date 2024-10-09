@@ -15,6 +15,7 @@ nav:
     - Utilities: 
       - code_reference/utils/utils.md
       - code_reference/utils/preprocessing.md
+      - code_reference/utils/dataset.md
     - Detection: 
       - code_reference/detection/detection.md
     - Classification: 
