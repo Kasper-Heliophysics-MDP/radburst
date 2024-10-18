@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-import astropy
+from astropy.io import fits
 
 def load_fits_file(fits_file_path, num_freq_chans_to_remove=10):
     """Load spectrogram from a FITS into a numpy array.
@@ -11,7 +11,7 @@ def load_fits_file(fits_file_path, num_freq_chans_to_remove=10):
     Returns:
         np.ndarray: Array 
     """
-    fits_full_data = astropy.io.fits.open(fits_file_path)
+    fits_full_data = fits.open(fits_file_path)
     fits_array = fits_full_data[0].data[:-num_freq_chans_to_remove,:]
     return fits_array
 

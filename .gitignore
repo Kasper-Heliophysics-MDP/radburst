@@ -2,3 +2,4 @@ __pycache__/
 radburst.egg-info/
 .venv/
 site/
+.ipynb_checkpoints/
