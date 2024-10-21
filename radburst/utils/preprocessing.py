@@ -143,3 +143,9 @@ def col_sums(arr, norm=True):
     sums = np.sum(arr, axis=0)
     return min_max_norm(sums) if norm else sums
 
+
+def stan_rows_remove_verts(arr):
+    """Standardize rows and remove vertical lines"""
+    res = standardize_rows(arr)
+    res = remove_vertical_lines(res)
+    return res
