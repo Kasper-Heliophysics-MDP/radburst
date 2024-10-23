@@ -11,19 +11,19 @@ Below are links to key sections of the documentation:
 - **[Updating Documentation](guides/update_docs.md)**: Instructions for maintaining and updating documentation.
 
 ## Code Reference
-- **[Reference Overview](code_reference/index.md)**: 
-- **[Utilities](code_reference/utils/utils.md)**: 
-- **[Detection](code_reference/detection/detection.md)**: 
-- **[Classification](code_reference/classification/classification.md)**: 
 
+- **[Reference Overview](code_reference/index.md)**: Overview of the codebase structure and main components.
+- **[Utilities](code_reference/utils/utils.md)**: General utility functions for data handling and visualization.
+- **[Preprocessing](code_reference/utils/preprocessing.md)**: Functions for data preprocessing and standardization.
+- **[Detection](code_reference/detection/detection.md)**: Algorithms for detecting solar radio bursts.
+- **[Classification](code_reference/classification/classification.md)**: CNN-based classification of solar radio bursts.
 
 ## Examples
 
-- **[Examples](examples/examples.md)**: 
-
+- **[Examples](examples/examples.md)**:
 
 ## Repository Structure
-    
+
     data/                   # Explanations and links to datasets and sample data
     docs/                   # Documentation (.md files)
     notebooks/              # Jupyter notebooks
@@ -36,5 +36,3 @@ Below are links to key sections of the documentation:
         utils/              # Common utility functions (e.g. load, preprocess, etc.)
     requirements.txt        # Project dependencies (read by setup.py when "pip install -e ." is run)
     mkdocs.yml              # Configuration for MkDocs documentation
-    
-
