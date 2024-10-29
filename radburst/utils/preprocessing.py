@@ -1,4 +1,9 @@
 import numpy as np
+from scipy.ndimage import binary_erosion, binary_dilation
+from scipy.ndimage import label
+from skimage.measure import regionprops
+import cv2
+
 
 def standardize_rows(arr):
     """Standardize each row by subtracting the mean and dividing by the standard deviation.
@@ -59,93 +64,106 @@ def remove_vertical_lines(arr, num_std = 5, dist = 10):
     return arr_verts_removed
 
 
-def softmax(arr):
-    """Apply the Softmax function to an input array.
-
-    The Softmax function normalizes an array by converting values into a probability distribution.
-    
-    Args:
-        arr (np.ndarray): Array
-    
-    Returns:
-        np.ndarray: Normalized array with same shape as input and values in [0,1].
-    """
-    max_val = np.max(arr, axis=0)
-    e_x = np.exp(arr - max_val)
-    return e_x / np.sum(e_x, axis=0)
-
-
-def standardize_rows(arr):
-    """Standardize each row by subtracting the mean and dividing by the standard deviation.
-
-    Args:
-        arr (np.ndarray): Array to standardize.
-
-    Returns:
-        np.ndarray: Row-standardized 2D array.
-    """
-    mean_per_row = np.mean(arr, axis=1, keepdims=True)
-    std_per_row = np.std(arr, axis=1, keepdims=True)
-
-    # Prevent divide by 0 errors
-    epsilon = 1e-8
-    std_per_row = np.maximum(std_per_row, epsilon)
-
-    standardized_arr = (arr - mean_per_row) / std_per_row
-
-    return standardized_arr
-
-
-def min_max_norm(arr):
-    """Scale values in input array to range [0,1]
-
-    Args:
-        arr (np.ndarray): 1D array to normalize.
-
-    Returns:
-        np.ndarray: 1D normalized array.
-    """
-    return (arr - np.min(arr)) / (np.max(arr) - np.min(arr))
-
-
-def resize_interp(arr, new_size):
-    """Resize a 1D array using interpolation.
-    
-    Args:
-        arr (np.ndarray): 1D array to resize.
-    
-    Returns:
-        nd.ndarray: 1D resized array.
-    """
-    original_indices = np.arange(len(arr))
-    new_indices = np.linspace(0, len(arr) - 1, new_size)
-    return np.interp(new_indices, original_indices, arr)
-
-
-def col_expected_vals(arr, norm=True):
-    """Calculate the expected value of each column"""
-    
-    # y data (column index for now but could be mapped to freq to get expected freq)
-    col_index = np.arange(arr.shape[0]).reshape(1,-1)
-
-    # Make each col a probability distribution (weights for sum)
-    soft_max_cols = softmax(arr) 
-    
-    # Weighted sum of each col
-    col_expected_vals = np.sum(np.dot(col_index, soft_max_cols), axis=0)
-
-    return min_max_norm(col_expected_vals) if norm else col_expected_vals
-
-
-def col_sums(arr, norm=True):
-    """Calculate the sum of each column (timestep) across all frequencies"""
-
-    sums = np.sum(arr, axis=0)
-    return min_max_norm(sums) if norm else sums
-
-
 def stan_rows_remove_verts(arr):
     """Standardize rows and remove vertical lines"""
     res = standardize_rows(arr)
     res = remove_vertical_lines(res)
     return res
+
+
+class BinaryMaskRegion:
+    def __init__(self, bbox):
+        self.min_row, self.min_col, self.max_row, self.max_col = bbox
+        self.height = self.max_row - self.min_row
+        self.width = self.max_col - self.min_col
+        self.hw_ratio = self.height / self.width
+        self.area = self.height * self.width
+
+
+class RegionManager:
+    def __init__(self):
+        self.regions = []
+
+    def add_region(self, region):
+        self.regions.append(region)
+
+    def _get_largest_2_regions(self):
+        if len(self.regions) < 2: return self.regions
+        sorted_area = sorted(self.regions, key=lambda r: r.area)
+        return sorted_area[-2:]
+    
+    def filter_largest_2_regions(self, row_diff_threshold=50, size_ratio_threshold=10):
+        if len(self.regions) < 2: return self.regions
+
+        # sometimes mask images have one large low (high row) region and one small high (low row) region 
+        # higest row = low frequency
+
+        largest_2_regions = self._get_largest_2_regions()
+        largest_reg = largest_2_regions[1]
+        second_largest_reg = largest_2_regions[0]
+
+        max_row_diff = largest_reg.max_row - second_largest_reg.max_row
+        size_ratio = largest_reg.area / second_largest_reg.area        
+
+        # if difference in highest row is greater than threshold, keep region with greater max row (lower in image)
+        if abs(max_row_diff) > row_diff_threshold:
+            return [largest_reg] if max_row_diff > 0 else [second_largest_reg]
+
+        # if the largest is greater than some factor larger than the second largest, only keep largest
+        if size_ratio > size_ratio_threshold:
+            return [largest_reg]
+        
+        return largest_2_regions
+  
+
+def create_binary_mask(arr, pct_threshold = 95):
+    threshold = np.percentile(arr, pct_threshold)
+    return arr > threshold
+
+
+def morph_ops(arr, erosion_struct_size = (10,3), dilation_struct_size = (1,5)):
+    """Make array binary and perform morphological operations to remove small components."""
+    arr = binary_dilation(arr, structure=np.ones((3,20)))
+
+    eroded_mask = binary_erosion(arr, structure=np.ones(erosion_struct_size))
+    dilation_mask = binary_dilation(eroded_mask, structure=np.ones(dilation_struct_size))
+    return dilation_mask
+
+
+def filtered_components(mask, 
+                        min_hw_ratio = 0.2, 
+                        min_area = 600, 
+                        min_h_wide_tall = 30, 
+                        min_area_wide_tall = 1000):
+    """Only keep connected components (regions) in binary mask that meet criteria."""
+    
+    filtered_mask = np.zeros_like(mask)
+    region_manager = RegionManager()
+
+    labeled_mask, _ = label(mask)
+    properties = regionprops(labeled_mask)
+
+    for prop in properties:
+        reg = BinaryMaskRegion(bbox=prop.bbox)
+
+        # Two criteria for keeping regions 
+            # main criteria for minimum height/width ratio and minimum area
+            # second criteria for bursts that don't pass main ratio but might be type 2 or 5
+        main_criteria = reg.hw_ratio >= min_hw_ratio and reg.area > min_area
+        keep_wide_tall_bursts_criteria = reg.height > min_h_wide_tall and reg.area > min_area_wide_tall
+    
+        # If the region meets criteria insert into manager
+        if main_criteria or keep_wide_tall_bursts_criteria:
+            filtered_mask[labeled_mask == prop.label] = 1
+            region_manager.add_region(region=reg)
+
+    # out of all regions added to manager (that passed two criteria in loop above)
+    # we will take the largest 2 regions (if there are >=2) and check two additional criteria
+    # the additional criteria are size_ratio and max_row_diff, more info in RegionManager class
+    filtered_largest_2_regions = region_manager.filter_largest_2_regions()
+
+    return filtered_largest_2_regions, filtered_mask
+
+
+def blur(arr, blur_filter_shape = (51,11)):
+    return cv2.GaussianBlur(arr,blur_filter_shape,0)  

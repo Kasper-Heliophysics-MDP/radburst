@@ -11,7 +11,7 @@ class Dataset:
         
         Args:
             data_dir (str): The root directory containing the FITS data files.
-            labels (str): Path to csv file containing labels (paths and burst types)
+            labels (str or pd.DataFrame): Path to csv file containing labels (paths and burst types) or labels dataframe
             preprocess (callable, optional): Function that takes a spectrogram array and returns a preprocessed array.
                                              Defaults to None.
             binary (bool, optional): True for binary labels: 0 and 1 for no burst and burst
@@ -24,32 +24,29 @@ class Dataset:
         self.data_dir = data_dir
         self.binary = binary
         self.preprocess = preprocess
-        
+
+        # Load labels data
         if isinstance(labels, str):
             self.labels_df = pd.read_csv(labels)
         elif isinstance(labels, pd.DataFrame):
             self.labels_df = labels
         else:
-            raise ValueError('Labels must be a file path or pandas dataframe.')
-
-        self.file_path_col = self.labels_df['path']
-        self.burst_type_col = self.labels_df['type']
-        self.binary_label_col = self.labels_df['burst']
+            raise TypeError('labels must be a str path or a pd.DataFrame')
+        
+        self.paths = self.labels_df['path']
     
 
     def __getitem__(self, idx):
-        file_path = os.path.join(self.data_dir, self.file_path_col.iloc[idx])
 
         # Load file
+        file_path = os.path.join(self.data_dir, self.labels_df['path'].iloc[idx])
         spectrogram_arr = utils.load_fits_file(file_path)
 
-        # Get label for file: 
-            # for binary labels are in {0,1} for burst or non-burst
-            # otherwise labels are in {2,3,4,5,6,7} for the burst type
+        # Get label for file
         if self.binary:
-            label = self.binary_label_col.iloc[idx]
+            label = self.labels_df['burst'].iloc[idx]
         else:
-            label = self.burst_type_col.iloc[idx]
+            label = self.labels_df['type'].iloc[idx]
 
         # Preprocss
         if self.preprocess:
@@ -62,15 +59,18 @@ class Dataset:
         return len(self.labels_df)
 
 
+    def get_filtered_dataset(self, condition):
+        new_labels = self.labels_df.query(condition).reset_index(drop=True)
+        new_dataset = Dataset(data_dir=self.data_dir,
+                              labels=new_labels,
+                              preprocess=self.preprocess,
+                              binary=self.preprocess)
+        return new_dataset
+
+
     def only_bursts(self):
-        return Dataset(data_dir=self.data_dir,
-                       labels=self.labels_df[self.labels_df['burst'] == 1],
-                       preprocess=self.preprocess,
-                       binary=self.binary)
+        return self.get_filtered_dataset(condition='burst == 1')
     
 
     def only_nonbursts(self):
-        return Dataset(data_dir=self.data_dir,
-                       labels=self.labels_df[self.labels_df['burst'] == 0],
-                       preprocess=self.preprocess,
-                       binary=self.binary)
+        return self.get_filtered_dataset(condition='burst == 0')
