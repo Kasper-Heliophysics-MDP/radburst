@@ -22,7 +22,7 @@
     
     
       
-        <title>Classification - RadBurst Documentation</title>
+        <title>CNN Classification of Radio Bursts - RadBurst Documentation</title>
       
     
     
@@ -75,6 +75,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#cnn-classification-of-radio-bursts" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -105,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Classification
+              CNN Classification of Radio Bursts
             
           </span>
         </div>
@@ -605,6 +610,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../utils/dataset/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dataset Class
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -667,7 +693,7 @@
         
   
   <span class="md-ellipsis">
-    Detection
+    Solar Radio Burst Detection
   </span>
   
 
@@ -743,16 +769,99 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    CNN Classification of Radio Bursts
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Classification
+    CNN Classification of Radio Bursts
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dataset
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dataset">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-loading-and-preprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Loading and Preprocessing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prediction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Future Improvements
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -811,6 +920,67 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dataset
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dataset">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-loading-and-preprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Loading and Preprocessing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prediction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Future Improvements
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -828,9 +998,82 @@
   
 
 
-  <h1>Classification</h1>
-
-
+<h1 id="cnn-classification-of-radio-bursts">CNN Classification of Radio Bursts</h1>
+<h2 id="overview">Overview</h2>
+<p>This part of the SunRise Project implements a Convolutional Neural Network (CNN) for classifying solar radio bursts. The model is designed to categorize spectrograms of radio emissions into different types of solar bursts or non-burst events.</p>
+<h2 id="dataset">Dataset</h2>
+<p>The dataset consists of spectrograms of radio emissions from various solar observatories, stored as parquet files. Each spectrogram is associated with metadata, including the type of burst (if any) and the instrument that recorded it.</p>
+<h3 id="data-loading-and-preprocessing">Data Loading and Preprocessing</h3>
+<p>The dataset is loaded using a custom <code>SpectrogramDataset</code> class, which handles:</p>
+<ol>
+<li>Reading the metadata from a CSV file</li>
+<li>Loading spectrogram data from parquet files</li>
+<li>Applying preprocessing transformations</li>
+</ol>
+<p>Key preprocessing steps include:</p>
+<ul>
+<li>Cleaning the spectrograms (likely removing noise or artifacts)</li>
+<li>Converting the data to PyTorch tensors</li>
+</ul>
+<p>```38:44:ML_CNN_multi.ipynb
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Unique values in 'instruments': ['Australia-ASSA_62']\n",
+      "extracted:       datetime_start datetime_end        instruments type  \\n",
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>## Model Architecture
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>The CNN model consists of the following layers:
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>1. Four convolutional layers, each followed by ReLU activation, batch normalization, and max pooling
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>2. A dropout layer for regularization
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>3. Two fully connected layers
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>The model can be configured for either binary classification (burst vs. no burst) or multi-class classification (different types of bursts).
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>## Training
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>The training process includes:
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>1. Splitting the data into training and testing sets
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>2. Using Adam optimizer with a learning rate scheduler
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>3. Employing either Binary Cross Entropy Loss (for binary classification) or Cross Entropy Loss (for multi-class classification)
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>4. Training for multiple epochs with batch processing
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>## Evaluation
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>The model&#39;s performance is evaluated using:
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>1. Confusion Matrix: Visualizes the model&#39;s predictions against true labels
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>2. Accuracy: Overall correctness of predictions
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>3. Balanced Accuracy: Accounts for imbalanced datasets by considering both True Positive Rate (TPR) and True Negative Rate (TNR)
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>```324:331:ML_CNN_multi.ipynb
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>      &quot;Train with multi-class:\n&quot;,
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>      &quot;torch.Size([32, 4]) torch.Size([32, 4])\n&quot;,
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>      &quot;output: tensor([[ 0.2891, -1.9227, -0.9357, -1.5601],\n&quot;,
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>      &quot;        [-0.1225, -2.0723,  1.9852, -0.4430],\n&quot;,
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>      &quot;        [ 0.0236, -1.4689,  1.0078, -1.6238],\n&quot;,
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>      &quot;        [-2.7489, -2.2627,  1.2177,  0.2870],\n&quot;,
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>      &quot;        [-2.1536, -1.9636,  1.4792,  0.2309],\n&quot;,
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>      &quot;        [-2.7985, -1.3299,  1.2968,  0.1508],\n&quot;,
+</span></code></pre></div></p>
+<h2 id="prediction">Prediction</h2>
+<p>The trained model can be used to classify new spectrograms. The process involves:</p>
+<ol>
+<li>Loading and preprocessing a spectrogram</li>
+<li>Passing it through the model</li>
+<li>Interpreting the output (either as a binary classification or multi-class probabilities)</li>
+</ol>
+<h2 id="future-improvements">Future Improvements</h2>
+<ol>
+<li>Fine-tuning hyperparameters for better performance</li>
+<li>Implementing more advanced data augmentation techniques</li>
+<li>Exploring ensemble methods or more complex architectures</li>
+<li>Use data from Peach Mountain to furhter improve generalization</li>
+</ol>
 
 
 

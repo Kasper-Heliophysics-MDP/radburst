@@ -701,6 +701,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code_reference/utils/dataset/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dataset Class
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -760,7 +781,7 @@
         
   
   <span class="md-ellipsis">
-    Detection
+    Solar Radio Burst Detection
   </span>
   
 
@@ -829,7 +850,7 @@
         
   
   <span class="md-ellipsis">
-    Classification
+    CNN Classification of Radio Bursts
   </span>
   
 
@@ -982,9 +1003,11 @@
 </ul>
 <h2 id="2-code-reference">2. Code Reference</h2>
 <ul>
-<li>To automatically generate documentation from your code's doctrings (in modules, functions or classes), use the following syntax in your Markdown files:
+<li>To automatically generate documentation from your code's doctrings (in modules, functions or classes), use the following syntax in your Markdown files:</li>
+</ul>
 <div class="language-markdown highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>::: radburst.utils.preprocessing
-</span></code></pre></div></li>
+</span></code></pre></div>
+<ul>
 <li>The line above will read the docstrings in <code>preprocessing.py</code> and create structured documentation that explains the functions, their parameters, and return values.</li>
 <li>
 <p>The current <code>mkdocs.yml</code> is configured to use Google-style dosctrings. Here's an example of a Google-style docstring for a function:</p>
@@ -1009,7 +1032,7 @@
 </ul>
 <h2 id="3-updating-mkdocsyml">3. Updating <code>mkdocs.yml</code></h2>
 <ul>
-<li>The <code>mkdocs.yml</code> file in the root directory configures the documentation site. Changes to documentation files/structure will need to be reflected here to make sure the site is rendered correctly. </li>
+<li>The <code>mkdocs.yml</code> file in the root directory configures the documentation site. Changes to documentation files/structure will need to be reflected here to make sure the site is rendered correctly.</li>
 <li>
 <p>Here is a preview of what it looks like:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">site_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RadBurst Documentation</span>
@@ -1031,25 +1054,25 @@
 </ul>
 <h2 id="4-preview-changes-locally">4. Preview Changes Locally</h2>
 <ul>
-<li>To preview your changes, run the following command from the project directory:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>mkdocs<span class="w"> </span>serve
-</span></code></pre></div></li>
-<li>This will provide a link to view the current documentation in your web browser.</li>
+<li>To preview your changes, run the following command from the project directory:</li>
 </ul>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>mkdocs<span class="w"> </span>serve
+</span></code></pre></div>
+- This will provide a link to view the current documentation in your web browser.</p>
 <h2 id="5-build-the-documentation-site-optional">5. Build the Documentation Site (Optional)</h2>
 <ul>
-<li>To generate the static site files without deploying, run:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mkdocs<span class="w"> </span>build
-</span></code></pre></div></li>
-<li>This will create site files in <code>site/</code>. Note <code>site/</code> is in <code>.gitignore</code> and this build command is automatically run in the following deployment step. Therefore, if changes look good after previewing with <code>mkdocs serve</code>, building is not required.</li>
+<li>To generate the static site files without deploying, run:</li>
 </ul>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mkdocs<span class="w"> </span>build
+</span></code></pre></div>
+- This will create site files in <code>site/</code>. Note <code>site/</code> is in <code>.gitignore</code> and this build command is automatically run in the following deployment step. Therefore, if changes look good after previewing with <code>mkdocs serve</code>, building is not required.</p>
 <h2 id="6-deploy-the-changes">6. Deploy the Changes</h2>
 <ul>
-<li>Once you're satisfied with your changes, they can be deployed:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mkdocs<span class="w"> </span>gh-deploy
-</span></code></pre></div></li>
-<li>This will build the documentation (if not already built), commit changes to the <code>gh-pages</code> branch and push the <code>gh-pages</code> branch to GitHub. The GitHub repo will host the documentation using <code>gh-pages</code>.</li>
+<li>Once you're satisfied with your changes, they can be deployed:</li>
 </ul>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mkdocs<span class="w"> </span>gh-deploy
+</span></code></pre></div>
+- This will build the documentation (if not already built), commit changes to the <code>gh-pages</code> branch and push the <code>gh-pages</code> branch to GitHub. The GitHub repo will host the documentation using <code>gh-pages</code>.</p>
 
 
 
