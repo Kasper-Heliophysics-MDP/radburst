@@ -14,7 +14,7 @@
         <link rel="prev" href="../../utils/dataset/">
       
       
-        <link rel="next" href="../../classification/classification/">
+        <link rel="next" href="../detection_ml/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Solar Radio Burst Detection - RadBurst Documentation</title>
+        <title>Burst Detection Overview - RadBurst Documentation</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#solar-radio-burst-detection" class="md-skip">
+        <a href="#burst-detection-overview" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Solar Radio Burst Detection
+              Burst Detection Overview
             
           </span>
         </div>
@@ -704,7 +704,7 @@
           
   
   <span class="md-ellipsis">
-    Solar Radio Burst Detection
+    Burst Detection Overview
   </span>
   
 
@@ -715,7 +715,7 @@
         
   
   <span class="md-ellipsis">
-    Solar Radio Burst Detection
+    Burst Detection Overview
   </span>
   
 
@@ -735,15 +735,6 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      Overview
-    </span>
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#key-components" class="md-nav__link">
@@ -776,6 +767,69 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../detection_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Machine Learning Detection
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../detection_morph_ops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Morphological Operations Detection
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../detection_drift_rate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Drift Rate-Based Detection
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -915,15 +969,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      Overview
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#key-components" class="md-nav__link">
     <span class="md-ellipsis">
       Key Components
@@ -968,8 +1013,7 @@
   
 
 
-<h1 id="solar-radio-burst-detection">Solar Radio Burst Detection</h1>
-<h2 id="overview">Overview</h2>
+<h1 id="burst-detection-overview">Burst Detection Overview</h1>
 <p>This module focuses on the detection of solar radio bursts from spectrogram data. The detection process is a crucial first step in identifying and classifying these phenomena.</p>
 <h2 id="key-components">Key Components</h2>
 <ol>
@@ -977,11 +1021,12 @@
 <p><strong>Preprocessing</strong>: Before detection, the spectrogram data typically undergoes preprocessing steps such as noise reduction and normalization. These steps are crucial for improving the detection accuracy.</p>
 </li>
 <li>
-<p><strong>Detection Algorithm</strong>: The core of this module is the burst detection algorithm. While the specific implementation details are not provided in the current codebase, common approaches include:</p>
-</li>
-<li>Drift Rate-based detection</li>
-<li>
-<p>Machine learning-based anomaly detection</p>
+<p><strong>Detection Algorithm</strong>: The core of this module is the burst detection algorithm. While not all methods are implemented in this codebase, refer to the following pages for more information on each approach:</p>
+<ul>
+<li><a href="../detection_drift_rate/">Drift Rate-Based Detection</a></li>
+<li><a href="../detection_ml/">Machine Learning-Based Anomaly Detection</a></li>
+<li><a href="../detection_morph_ops/">Morphological Operations for Identifying Candidate Regions</a></li>
+</ul>
 </li>
 <li>
 <p><strong>Post-processing</strong>: After initial detection, post-processing steps may be applied to refine the results, such as merging nearby detections or filtering out false positives.</p>
