@@ -18,6 +18,9 @@ nav:
       - code_reference/utils/dataset.md
     - Detection: 
       - code_reference/detection/detection.md
+      - code_reference/detection/detection_ml.md
+      - code_reference/detection/detection_morph_ops.md
+      - code_reference/detection/detection_drift_rate.md
     - Classification: 
       - code_reference/classification/classification.md
   - Examples: examples/examples.md
