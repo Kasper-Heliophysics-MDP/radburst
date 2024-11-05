@@ -96,6 +96,7 @@ class BinaryMaskRegion:
                       in the format (min_row, min_col, max_row, max_col).
     """
     def __init__(self, bbox):
+        self.bbox = bbox
         self.min_row, self.min_col, self.max_row, self.max_col = bbox
         self.height = self.max_row - self.min_row
         self.width = self.max_col - self.min_col
@@ -177,9 +178,8 @@ def create_binary_mask(arr, pct_threshold = 95):
 
 
 def morph_ops(binary_arr, 
-              dilation_1_struct_size = (3,20),
-              erosion_struct_size = (10,3), 
-              dilation_2_struct_size = (1,5)):
+              erosion_struct_size = (3,10), 
+              dilation_2_struct_size = (3,10)):
     """Apply morphological operations to a binary mask to refine components/structures.
 
     The goal is to remove small structures and enhance larger structures (potential bursts).
@@ -193,8 +193,7 @@ def morph_ops(binary_arr,
     Returns:
         np.ndarray: Refined binary mask with morphological operations applied.
     """
-    dilation_1_mask = binary_dilation(binary_arr, structure=np.ones(dilation_1_struct_size))
-    eroded_mask = binary_erosion(dilation_1_mask, structure=np.ones(erosion_struct_size))
+    eroded_mask = binary_erosion(binary_arr, structure=np.ones(erosion_struct_size))
     dilation_2_mask = binary_dilation(eroded_mask, structure=np.ones(dilation_2_struct_size))
     return dilation_2_mask
 
@@ -256,7 +255,7 @@ def filtered_components(mask,
     return filtered_largest_2_regions, filtered_mask
 
 
-def blur(arr, blur_filter_shape = (51,11)):
+def blur(arr, blur_filter_shape = (61,11)):
     """Blur array using a Gaussian kernel to enhance potential bursts.
 
     Args:
@@ -266,4 +265,4 @@ def blur(arr, blur_filter_shape = (51,11)):
     Returns:
         np.ndarray: Blurred array.
     """
-    return cv2.GaussianBlur(arr,blur_filter_shape,0)  
+    return cv2.GaussianBlur(arr,blur_filter_shape, 0)  
