@@ -1,9 +1,16 @@
 import os
+
+import skimage.transform
 import radburst.utils.utils as utils
 import radburst.utils.preprocessing as prep
 import pandas as pd
+import torch
+from torch.utils.data import Dataset as TorchDataset
+import skimage
+import numpy as np
 
-class Dataset:
+
+class Dataset(TorchDataset):
     """Dataset class to manage loading, storing and processing data."""
     
     def __init__(self, data_dir, labels, preprocess=None, binary=True):
@@ -52,7 +59,12 @@ class Dataset:
         if self.preprocess:
             spectrogram_arr = self.preprocess(spectrogram_arr)
 
-        return spectrogram_arr, label
+        # Convert to tensorsso 
+        spect = np.expand_dims(spectrogram_arr, axis=0)
+        spect_tensor = torch.FloatTensor(spect)
+        label_tensor = torch.FloatTensor([label])
+
+        return spect_tensor, label_tensor
     
 
     def __len__(self):
@@ -74,3 +86,22 @@ class Dataset:
 
     def only_nonbursts(self):
         return self.get_filtered_dataset(condition='burst == 0')
+
+
+class Resize():
+    def __init__(self, new_size):
+        self.new_size = new_size
+
+    def __call__(self, array):
+        return skimage.transform.resize(array, self.new_size)
+    
+
+class MinMaxNormalize():
+    def __init__(self, eps=1e-8):
+        self.eps = eps
+
+    def __call__(self, array):
+        """Add small epsilon to prevent division by zero"""
+        min_val = np.min(array)
+        max_val = np.max(array)
+        return (array - min_val) / (max_val - min_val + self.eps)
