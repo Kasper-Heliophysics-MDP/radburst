@@ -178,7 +178,7 @@ def create_binary_mask(arr, pct_threshold = 95):
 
 
 def morph_ops(binary_arr, 
-              erosion_struct_size = (3,10), 
+              erosion_struct_size = (10,3), 
               dilation_2_struct_size = (3,10)):
     """Apply morphological operations to a binary mask to refine components/structures.
 
@@ -193,13 +193,14 @@ def morph_ops(binary_arr,
     Returns:
         np.ndarray: Refined binary mask with morphological operations applied.
     """
+    binary_arr = binary_dilation(binary_arr, structure=np.ones((4,15)))
     eroded_mask = binary_erosion(binary_arr, structure=np.ones(erosion_struct_size))
     dilation_2_mask = binary_dilation(eroded_mask, structure=np.ones(dilation_2_struct_size))
     return dilation_2_mask
 
 
 def filtered_components(mask, 
-                        min_hw_ratio = 0.2, 
+                        min_hw_ratio = 0.14, 
                         min_area = 600, 
                         min_h_wide_tall = 30, 
                         min_area_wide_tall = 1000):
@@ -252,7 +253,7 @@ def filtered_components(mask,
     # the additional criteria are size_ratio and max_row_diff, more info in RegionManager class
     filtered_largest_2_regions = region_manager.filter_largest_2_regions()
 
-    return filtered_largest_2_regions, filtered_mask
+    return filtered_largest_2_regions, filtered_mask, region_manager
 
 
 def blur(arr, blur_filter_shape = (61,11)):
