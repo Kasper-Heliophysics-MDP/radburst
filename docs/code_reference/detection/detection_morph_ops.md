@@ -3,6 +3,15 @@
 ### Objective:
 Find burst candidate regions which can later be analyzed and filtered to detect solar radio bursts.
 
+### Overview
+One of the main challenges with detecting bursts with in our LWA data is the low signal to noise ratio. To address this challenge, morphological operations are used to reduce noise: 
+1. Apply an intensity threshold to create a binary image representation of a spectrogram. 
+2. Use morphological erosion to remove noise regions and generate bounding boxes around potential bursts.
+3. Filter the remaining boxes to identify the most likely burst candidates
+4. Apply these steps to all spectrogram samples, saving characterisitics of each predicted bounding box. 
+The characteristics for each sample form a new dataset that can be used to train a binary classification model. This model will classify each bounding box as either burst (positive) or non-burst (false positive)
+
+
 ### Steps
 1. **Preprocess Raw Input:** 
     - Standardize rows to remove horizontal lines.
@@ -18,6 +27,11 @@ Find burst candidate regions which can later be analyzed and filtered to detect 
     - Filter the remaining connected components after the morphological operations. The main criteria for filtering is based on size and shape. Additinal criteria were added to include type 2 bursts and to redcue false positives. For more information on this step, refer to `filtered_components()` in the ([preprocessing reference](../utils/preprocessing.md)).
 5. **Detection Candidates:**
     - Plotting bounding boxes around the regions that passed all filter criteria.
+
+
+### Dataset
+
+### Box classification model
 
 ### Code
 The code for all processing steps is in `radburst/utils/preprocessing.py` ([reference](../utils/preprocessing.md)). The code used to create the plots below is found in `notebooks/exploration/preprocessing.ipynb`.
