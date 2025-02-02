@@ -16,7 +16,7 @@ git clone https://github.com/Kasper-Heliophysics-MDP/radburst.git
 ```
 2. **Move into the project directory:**
 ```bash
-cd draft
+cd radburst
 ```
 3. **Set up a virtual enviroment (to isolate dependencies):**
 ```bash
