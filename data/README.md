@@ -1,30 +1,23 @@
-- Explain datasets here (collected data, online ecallisto, etc) including where/how to download them
-- Include folder here for sample data w/ labels to demonstrate or test functions (preprocessing, detection, etc)
-
 # Data Download and Processing
 
-## e-Callisto Data
+**To read in data, download FITfiles from the google drive as a zip file. This will download multiple zip files. Place them all in this data folder**
 
-### 1. Data Source
+metadata/                               Folder of csv files for metadata.  
 
-- **Source**: e-Callisto (extended Compound Astronomical Low-cost Low-frequency Instrument for Spectroscopy and Transportable Observatory) network
-- **URL**: http://soleil80.cs.technik.fhnw.ch/solarradio/data/2002-20yy_Callisto/
-- **Content**: Solar radio spectrograms from various observatories worldwide
-- **Structure**: Organized by year/month/day
+    classification_labels_raw.csv           Someone made manual classifications of sun data. These were png images of spectograms. 
+                                            Link to classifications: https://docs.google.com/document/d/1YfonaM4mR5wb6eVOeXuNQUpLTaiJpuKH_D6yrXy9aA4/edit  
 
-### 2. Downloaded Data
+    filtered-labels-20240309-20240701.csv   This csv contains rows for every fit file in the google drive from the range of dates 
+                                            (which believe is unknown) where classifications were made. __This csv is what you 
+                                            should use to read in data.__ 
 
-- **Location**: Local 'data/' directory
-- **Structure**: Mirrors the online repository (year/month/day)
-- **File Type**: .gz files (likely compressed FITS files)
+    full-labels-20240120-20241009.csv       This csv contains rows for every fit file in the google drive as of 
+                                            10/18/24 with classifications listed.  
 
-### 3. Processed Data
+sample_data/                            Just examples to give you a picture of what we're working with.  
+  
+create_labels.ipynb                     Builds the full labels and filtered labels csv. Just reads files from the drive and 
+                                        assigns them their classification as given in classification_labels_raw.csv.  
+  
+ 
 
-- **Process**: Files are filtered based on a maximum frequency threshold
-- **Output**:
-  - 'all_files.txt': Lists all downloaded files
-  - 'kept_files.txt': Lists files kept after filtering
-
-## Hugging Face Datasets
-
-Australia ASAA data.

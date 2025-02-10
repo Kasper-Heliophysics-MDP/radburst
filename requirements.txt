@@ -4,3 +4,11 @@ mkdocstrings[python]
 ipykernel
 astropy
 torch
+scikit-image
+pandas
+numpy
+opencv-python
+tqdm
+matplotlib
+seaborn
+scikit-learn
