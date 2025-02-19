@@ -15,7 +15,7 @@ from astropy.io import fits
 class Dataset(TorchDataset):
     """Dataset class to manage loading, storing and processing data."""
     
-    def __init__(self, data_dir, labels, preprocess=None, binary=True, zip=False):
+    def __init__(self, data_dir, labels, preprocess=None, binary=True, zip=False, resize=None, scaler=None):
         """Intialize the dataset.
         
         Args:
@@ -36,6 +36,8 @@ class Dataset(TorchDataset):
         self.binary = binary
         self.preprocess = preprocess
         self.zip = zip
+        self.resize = resize
+        self.scaler = scaler
 
         # Load labels data
         if isinstance(labels, str):
@@ -90,7 +92,17 @@ class Dataset(TorchDataset):
         if self.preprocess:
             spectrogram_arr = self.preprocess(spectrogram_arr)
 
-        return {"spectrogram": spectrogram_arr, "label": label, "path": self.labels_df['path'].iloc[idx]}
+        if self.resize:
+            spectrogram_arr = np.resize(a=spectrogram_arr, new_shape=self.resize)
+
+        if self.scaler:
+            spectrogram_arr = self.scaler.fit_transform(X=spectrogram_arr)
+
+        # Convert to tensor
+        spectrogram_arr = torch.tensor(spectrogram_arr, dtype=torch.float32).unsqueeze(0)
+        label = torch.tensor(label)
+
+        return {"spectrogram": spectrogram_arr, "label": label, "path": self.labels_df['path'].iloc[idx], "datetime": self.labels_df['datetime'].iloc[idx]}
     
 
     def __len__(self):

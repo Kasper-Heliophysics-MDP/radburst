@@ -1,0 +1,18 @@
+default:
+  #where is the data and labels located
+  data_path: ['data/FITfiles-20250205T173408Z-001.zip', 'data/FITfiles-20250205T173408Z-002.zip', 'data/FITfiles-20250205T173408Z-003.zip']
+  labels_path: 'data/metadata/filtered-labels-20240309-20240701.csv'
+  
+  batch_size: 32
+  lr: 0.0005
+  pos_weight: 1.3 
+  max_epoch: 10
+  validate_every_n_steps: 1
+  
+  get_data_from_zip: True # Do you have all data saved to your hard drive or did you just download the zip file
+  pct_test: 0.2 # What percent of the data should be saved for testing
+
+  #where to save the model checkpoint
+  checkpoint_every_n_steps: 1
+  load_from_checkpoint: null
+  checkpoint_directory: 'cnn_classification/checkpoints/'

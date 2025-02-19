@@ -1,15 +1,5 @@
 # Morphological Operations Detection
 
-### Folder structure
-
-TODO: write stuff here:
-
-dataset/
-    
-preprocessing/ 
-
-morphops_detection.ipynb
-
 ### Objective:
 Find burst candidate regions which can later be analyzed and filtered to detect solar radio bursts.
 

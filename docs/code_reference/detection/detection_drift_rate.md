@@ -1,2 +1,0 @@
-# Drift Rate-Based Detection
-

@@ -12,3 +12,4 @@ tqdm
 matplotlib
 seaborn
 scikit-learn
+torchvision
