@@ -2,7 +2,7 @@
 
 **To read in data, download FITfiles from the google drive as a zip file. This will download multiple zip files. Place them all in this data folder**
 
-    metadata/                                     Folder of csv files for metadata.  
+    metadata/                               Folder of csv files for metadata.  
 
         classification_labels_raw.csv           Someone made manual classifications of sun data. These were png images of spectograms. Link to classifications: https://docs.google.com/document/d/1YfonaM4mR5wb6eVOeXuNQUpLTaiJpuKH_D6yrXy9aA4/edit  
 
@@ -22,7 +22,7 @@
 
     sample_data/                            Just examples to give you a picture of what we're working with.  
   
-    create_labels.ipynb                     Builds the full labels and filtered labels csv. Just reads files from the drive and assigns them their classification as given in     classification_labels_raw.csv.  
+    create_labels.ipynb                     Builds the full labels and filtered labels csv. Just reads files from the drive and assigns them their classification as given in classification_labels_raw.csv.  
 
     buildDAEmetadata.py                     Takes every datum we have, builds a csv with its date, time, and burst classification, thenfinds a datum from any ALASKA station recorded at the same time and adds that to the csv
 
