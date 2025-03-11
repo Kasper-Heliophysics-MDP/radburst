@@ -4,11 +4,12 @@ import pandas as pd
 from tqdm import tqdm
 from datetime import datetime
 from torch.utils.data import DataLoader
-from website_access import website as web
 import csv
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import utils.preprocessing as prep
 import utils.utils as util
+import utils.website as web
+import utils.time_utils as clock
 from utils.dataset import Dataset
 
 url = "https://soleil.i4ds.ch/solarradio/data/BurstLists/2010-yyyy_Monstein/2024/"
@@ -40,10 +41,11 @@ curr_month = "00"
 callisto_data = {}
 for batch_idx, batch in tqdm(enumerate(burst_dataloader), total=len(burst_dataloader)): 
     batch_datetime_est = batch['datetime'][0]
-    batch_datetime_utc = web.convert_to_utc(batch_datetime_est)
-    batch_time = batch_datetime_utc[11:]
-    batch_month = batch_datetime_utc[5:7]
-    batch_day = batch_datetime_utc[8:10]
+    batch_datetime_utc = clock.est_to_utc(batch_datetime_est)
+    datetime_split = clock.time_helper(batch_datetime_utc)
+    batch_time = datetime_split['time']
+    batch_month = datetime_split['month']
+    batch_day = datetime_split['day']
     found = False
 
     # If current loaded file is from a different month than data
@@ -60,7 +62,7 @@ for batch_idx, batch in tqdm(enumerate(burst_dataloader), total=len(burst_datalo
     for index, entry in callisto_data.iterrows():
 
         # If this eCallisto burst happened within the date and time range that our station was recording
-        if web.is_within_range(entry['time'], web.get_15_range(batch_time)) and batch_month == entry['date'][4:6] and batch_day == entry['date'][6:8]:
+        if clock.is_within_range(entry['time'], clock.get_15_range(batch_time)) and batch_month == entry['date'][4:6] and batch_day == entry['date'][6:8]:
             found = True
             burst_batch_dict[batch_datetime_est] = ", ".join(entry['stations'])
             # Loop over stations that observed this boost
@@ -86,7 +88,7 @@ curr_month = "00"
 callisto_data = {}
 for batch_idx, batch in tqdm(enumerate(nonburst_dataloader), total=len(nonburst_dataloader)): 
     batch_datetime_est = batch['datetime'][0]
-    batch_datetime_utc = web.convert_to_utc(batch_datetime_est)
+    batch_datetime_utc = clock.est_to_utc(batch_datetime_est)
     batch_time = batch_datetime_utc[11:]
     batch_month = batch_datetime_utc[6:7]
     found = False
@@ -105,7 +107,7 @@ for batch_idx, batch in tqdm(enumerate(nonburst_dataloader), total=len(nonburst_
     for index, entry in callisto_data.iterrows():
 
         # If this eCallisto burst happened within the date and time range that our station was recording
-        if web.is_within_range(entry['time'], web.get_15_range(batch_time)) and batch_month == entry['date'][4:6] and batch_day == entry['date'][6:8]:
+        if clock.is_within_range(entry['time'], clock.get_15_range(batch_time)) and batch_month == entry['date'][4:6] and batch_day == entry['date'][6:8]:
 
             found = True
             burst_batch_dict[batch_datetime_est] = ", ".join(entry['stations'])
