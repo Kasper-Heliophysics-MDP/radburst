@@ -19,7 +19,7 @@ import utils.preprocessing as prep
 class Dataset(TorchDataset):
     """Dataset class to manage loading, storing and processing data."""
     
-    def __init__(self, data_dir, labels, cache_folder=None, preprocess=None, binary=True, zip=False, resize=None, scaler=None, verbose=False):
+    def __init__(self, data_dir, labels, cache_folder=None, preprocess=None, binary=True, zip=False, resize=None, scaler=False, verbose=False):
         """Intialize the dataset.
         
         Args:
@@ -145,13 +145,15 @@ class Dataset(TorchDataset):
 
         # Resize
         if self.resize:
-            spectrogram_arr = np.resize(a=spectrogram_arr, new_shape=self.resize)
-            spectrogram_arr_callisto = np.resize(a=spectrogram_arr_callisto, new_shape=self.resize)
+            r = Resize(self.resize)
+            spectrogram_arr = r(spectrogram_arr)
+            spectrogram_arr_callisto = r(spectrogram_arr_callisto)
 
         # Scale
         if self.scaler:
-            spectrogram_arr = self.scaler.fit_transform(X=spectrogram_arr)
-            spectrogram_arr_callisto = self.scaler.fit_transform(X=spectrogram_arr_callisto)
+            m = MinMaxNormalize()
+            spectrogram_arr = m(spectrogram_arr)
+            spectrogram_arr_callisto = m(spectrogram_arr_callisto)
 
         # Convert to tensor
         spectrogram_arr = torch.tensor(spectrogram_arr, dtype=torch.float32).unsqueeze(0)

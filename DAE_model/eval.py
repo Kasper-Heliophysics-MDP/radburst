@@ -9,7 +9,7 @@ import yaml
 from models.DAE_tf import build_denoising_autoencoder
 from train import load_checkpoint
 
-def plot_sample(features, predicted, actual, index, pdf):
+def plot_sample(title, features, predicted, actual, pdf):
     """
     Plot input, predicted output, and actual output for a single datapoint.
     
@@ -21,7 +21,7 @@ def plot_sample(features, predicted, actual, index, pdf):
         pdf (PdfPages): PDF object to save the plots.
     """
     fig, axes = plt.subplots(1, 3, figsize=(15, 5))
-    fig.suptitle(f"Sample {index + 1}")
+    fig.suptitle(f"{title}")
 
     # Plot Input Features
     axes[0].imshow(features.squeeze(), cmap="viridis", aspect="auto")
@@ -55,6 +55,7 @@ def evaluate_and_plot_samples(model, val_loader, n_samples=0, pdf_filename="outp
     """
     # Initialize PDF for saving plots
     with PdfPages(pdf_filename) as pdf:
+        all_plot_titles = []
         all_inputs = []
         all_callistos = []
         all_predictions = []
@@ -65,8 +66,9 @@ def evaluate_and_plot_samples(model, val_loader, n_samples=0, pdf_filename="outp
         # Evaluate data in batches
         with torch.no_grad():
             for batch_idx, batch in enumerate(val_loader):
-                inputs, callistos = batch['peach_mountain_spectrogram'], batch['callisto_spectrogram']  # Adjust depending on your data
+                titles, inputs, callistos = batch['path'], batch['peach_mountain_spectrogram'], batch['callisto_spectrogram']  # Adjust depending on your data
                 inputs, callistos = inputs.cpu().numpy(), callistos.cpu().numpy()
+                
 
                 # Convert PyTorch tensors to NumPy arrays for TensorFlow
                 inputs = np.array(inputs)
@@ -84,6 +86,8 @@ def evaluate_and_plot_samples(model, val_loader, n_samples=0, pdf_filename="outp
                 total_psnr += psnr_batch
 
                 # Collect data for later plotting
+                for i, idx in enumerate(titles):
+                    all_plot_titles.append(titles[i])
                 all_inputs.append(inputs)
                 all_callistos.append(callistos)
                 all_predictions.append(predictions)
@@ -108,7 +112,7 @@ def evaluate_and_plot_samples(model, val_loader, n_samples=0, pdf_filename="outp
 
         # Plot and save sampled datapoints
         for i, idx in enumerate(sample_indices):
-            plot_sample(all_inputs[idx], all_predictions[idx], all_callistos[idx], i, pdf)
+            plot_sample(all_plot_titles[idx], all_inputs[idx], all_predictions[idx], all_callistos[idx], pdf)
 
         print(f"Test Mean Squared Error: {avg_mse:.4f}")
         print(f"Test Peak Signal-to-Noise Ratio: {avg_psnr:.2f} dB")

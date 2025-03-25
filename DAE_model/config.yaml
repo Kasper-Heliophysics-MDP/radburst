@@ -22,4 +22,4 @@ default:
 
   #evaluation
   eval_output_pdf_path: "DAE_Model/evaluation_output.pdf"
-  eval_num_samples: 5
+  eval_num_samples: 11

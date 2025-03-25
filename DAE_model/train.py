@@ -137,6 +137,7 @@ def train(args):
         zip = args['get_data_from_zip'],
         cache_folder = args['cache_path'],
         resize = resize_arg,
+        scaler = True,
     )
 
     device = '/GPU:0' if tf.config.list_physical_devices('GPU') else '/CPU:0'
