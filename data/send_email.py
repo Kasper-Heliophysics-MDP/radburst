@@ -31,8 +31,9 @@ data = Dataset(data_dir= data_path,
               zip=True)
 data = data.only_bursts()
 
-for i in range(0, 3):
+for i in range(0, 3): #get three files
     dat_dict = random.choice(data)
+    #only want files from the given pull from month
     while(web.time_helper(dat_dict['datetime'])['month'] != pull_from_month):
         print(web.time_helper(dat_dict['datetime'])['month'])
         dat_dict = random.choice(data)
@@ -42,17 +43,17 @@ for i in range(0, 3):
     spectrogram_arr = None
     file_found = False
     output_jpg = None
-    os.makedirs(data_collect, exist_ok=True)
-    for zipped_file in data_path:
+    os.makedirs(data_collect, exist_ok=True) #make directory to save data in
+    for zipped_file in data_path: #search for fit file in our data
         zip_ref = zipfile.ZipFile(zipped_file, 'r')
         fit_file_name = file_path
         file_found = False
-        if fit_file_name in zip_ref.namelist():
+        if fit_file_name in zip_ref.namelist(): #if the name matches
             file_found = True
             fit_file = zip_ref.open(fit_file_name)
             fits_full_data = fits.open(fit_file)
-            spectrogram_arr = utils.load_fits_file(fits_full_data)
-            plt.imshow(spectrogram_arr.astype(float), aspect='auto')  
+            spectrogram_arr = utils.load_fits_file(fits_full_data) #extract data
+            plt.imshow(spectrogram_arr.astype(float), aspect='auto')  #plot it
             plt.title(fit_file_name)
 
             # Save the plot as a .jpg file
@@ -62,15 +63,15 @@ for i in range(0, 3):
             print(output_jpg)
             break
     
-    if(file_found):
-        utc = clock.est_to_utc(dat_dict['datetime'])
+    if(file_found): #if you found the filename in our data
+        utc = clock.est_to_utc(dat_dict['datetime']) #callisto data stored in utc
         url = Callisto_fit_url + clock.time_helper(utc)['year'] + "/" + clock.time_helper(utc)['month'] + "/" + clock.time_helper(utc)['day'] + "/"
         print(url)
         print([station, clock.time_helper(utc)['time'].replace(":", "")])
-        response = web.get_file_list(url, [station, clock.time_helper(utc)['time'].replace(":", "")])
+        response = web.get_file_list(url, [station, clock.time_helper(utc)['time'].replace(":", "")]) #get files with the correct date and the station ALASKA in filename
         print(response.status_code)  # Should be 200 if successful
         print(response.headers.get("Content-Type"))  # Should be 'application/fits' or similar
-        with gzip.open(BytesIO(response.content), "rb") as gz_file:
+        with gzip.open(BytesIO(response.content), "rb") as gz_file: #callisto uses gzip to store files on their website
             decompressed_data = BytesIO(gz_file.read())
             with fits.open(decompressed_data) as hdul:
                 hdul.info()  # Display FITS file structure
@@ -83,6 +84,7 @@ for i in range(0, 3):
                 plt.savefig(output_jpg, format='jpg', dpi=300)  # Save with 300 DPI for better quality
                 plt.close() 
 
+#get the burst list text file for your pull from month
 csv_url = "http://soleil80.cs.technik.fhnw.ch/solarradio/data/BurstLists/2010-yyyy_Monstein/2024/"
 response = web.get_file(csv_url, pull_from_month)
 csv_path = os.path.join(data_collect, pull_from_month + "_burst_list.txt")
@@ -90,13 +92,18 @@ with open(csv_path, "wb") as file:
     for chunk in response.iter_content(chunk_size=1024):  # Download in chunks
         file.write(chunk)
    
-# Create a ZIP archive
+#data_collect should now contain:
+# Images of our data
+# Images of callisto data from the same time as our data
+# Burst list for months that data is from
+
+# zip up the data collect folder
 zip_folder_name = 'zipped_data'
 shutil.make_archive(zip_folder_name, "zip", data_collect)
 
 zip_folder_name = zip_folder_name + ".zip"
+
 if(0):
-    # Attach the ZIP file
 
     # Email credentials
     sender_email = "callen.fields@gmail.com"
@@ -104,7 +111,7 @@ if(0):
 
     # Create the email
 
-    uniqnames = ['aashim', 'fcallen']
+    uniqnames = ['fcallen']
     # Send the email
     for name in uniqnames:
         try:
@@ -114,15 +121,10 @@ if(0):
             msg["To"] = receiver_email
             msg["Subject"] = "Hello from Python!"
 
-            body = "Hi Aashi\n\nThis is what I've been working on. tldr: we have 6 months of LWA data we could go through and classify to help with DAE training. This presents a way to automate this in an organized manner.\n\n"
-            bod_ds = "There's about 2000 unclassified files in the google drive. We could apply a minimum frequency value threshold to get this number down a little. Also we probably don't need to do all of them. Really we just need to find more bursts so that our training dataset is more robust. "
-            body_2 = "We could send this zip file out along with a google form. We would ask people to classify the unclassified files in this attached zip folder. Then they would fill out the form with their predictions. "
-            body_3 = "It's all automated in python so we could easily adjust who we send an email to, how much data to send, and what files to send. Also, we can very easily keep track of every made prediction using results from the google form."
-            body_4 = " Google Forms allows you to export results to a CSV so we could easily parse that in python to automate labeling as well.\n\n"
-            body_5 = "But yeah, I won't be there today for my midterm so keep me updated. After I send this email, I will not be thinking about Helio until March 9th at the earliest.\n\n"
-            body_6 = "Thank you,\nCallen"
-            msg.attach(MIMEText(body + body_2 + body_3 + body_4 + body_5 + body_6, "plain"))
+            body = "Hi Callen\n\nThis is Callen sending you an email from python.\n\nThank you,\nCallen"
+            msg.attach(MIMEText(body, "plain"))
 
+            #Attach the zip folder
             with open(zip_folder_name, "rb") as attachment:
                 part = MIMEApplication(attachment.read(), Name=os.path.basename(zip_folder_name))
                 part["Content-Disposition"] = f'attachment; filename="{os.path.basename(zip_folder_name)}"'

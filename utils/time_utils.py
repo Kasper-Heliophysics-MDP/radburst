@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 import re
+import pytz
 
 def is_within_range(small_range, large_range):
     '''
@@ -55,9 +56,12 @@ def est_to_utc(datetime_str):
     Returns:
         string: date and time of the same format but moved up 4 hours
     '''
-    dt = datetime.strptime(datetime_str, "%Y-%m-%d %H:%M:%S")
+    est = pytz.timezone('US/Eastern')
     
-    dt_utc = dt + timedelta(hours=4)
+    dt = datetime.strptime(datetime_str, "%Y-%m-%d %H:%M:%S") # Parse the input string into a timezone-aware datetime object
+    dt_est = est.localize(dt)  
+
+    dt_utc = dt_est.astimezone(pytz.utc)
     
     return dt_utc.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -71,9 +75,13 @@ def utc_to_est(datetime_str):
     Returns:
         string: date and time of the same format but moved back 4 hours
     '''
-    dt = datetime.strptime(datetime_str, "%Y%m%d_%H:%M")
+    utc = pytz.utc
+    est = pytz.timezone('US/Eastern')
     
-    dt_est = dt - timedelta(hours=4)  # Subtract 4 hours to go from UTC to EST
+    dt = datetime.strptime(datetime_str, "%Y%m%d_%H:%M")  # Parse the input string into a timezone-aware datetime object
+    dt_utc = utc.localize(dt)
+    
+    dt_est = dt_utc.astimezone(est)
     
     return dt_est.strftime("%Y%m%d_%H:%M")
 
@@ -82,7 +90,7 @@ def time_helper(datetime_str):
     Helper for splitting up datetime strings
 
     Args:
-        datetime_str (str): date and time of the following format: "YY-mm-dd HH:MM:SS"
+        datetime_str (str): date and time of the following format: "YYYY-mm-dd HH:MM:SS"
     
     Returns:
         dict: contains precise portions of the datetime string
