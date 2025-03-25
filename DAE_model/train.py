@@ -147,9 +147,8 @@ def train(args):
 
     # Load trained state
     starting_epoch = 1
-    path_saved_model = args['checkpoint_directory']
-    if path_saved_model:
-        model, optimizer, starting_epoch = load_checkpoint(path_saved_model, model, optimizer)
+    if args['load_from_checkpoint']:
+        model, optimizer, starting_epoch = load_checkpoint(args['checkpoint_directory'], model, optimizer)
 
     # Create DataLoader objects for training and validation
     train_dataset = dataset.trainset()
