@@ -12,8 +12,45 @@ import os
 import sys
 import yaml
 from dataset.dataset import Dataset
+from matplotlib.backends.backend_pdf import PdfPages
+import matplotlib.pyplot as plt
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import utils.preprocessing as prep
+
+def plot_sample(title, input, callisto, output, label, pdf):
+    """
+    Plot input, callisto data, and model for a single datapoint.
+    
+    Args:
+        title (str): file path will be the plot title
+        input (np.array): Input data.
+        callisto (np.array): callisto data.
+        output (np.array): model output.
+        label (int): hand labelled burst type.
+        pdf (PdfPages): PDF object to save the plots.
+    """
+    fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+    fig.suptitle(f"{title}")
+
+    plots = [("Input LWA Data", input), 
+             ("eCallisto Data", callisto), 
+             ("DAE Output", output)]
+    
+    for ax, (plot_title, data) in zip(axes, plots):
+        data = tf.squeeze(data)
+        ax.imshow(data, cmap="viridis", aspect="auto")
+        ax.set_title(plot_title)
+        ax.axis("off")
+
+        # Add label text box in the top-right corner
+        ax.text(0.95, 0.05, f"Label: {label}", 
+                transform=ax.transAxes, fontsize=10,
+                color="white", backgroundcolor="black",
+                ha="right", va="bottom")
+
+    plt.tight_layout()
+    pdf.savefig(fig)
+    plt.close(fig)
 
 def load_checkpoint(checkpoint_dir, model, optimizer):
     """
@@ -82,14 +119,19 @@ def save_checkpoint(checkpoint_dir, epoch, model, optimizer, train_loss, val_los
     checkpoint.save(checkpoint_path)
     print(f"Checkpoint saved: {checkpoint_path}")
 
-def validate_one_epoch(model, val_loader, criterion, device='cpu'):
+def validate_one_epoch(model, val_loader, criterion, device='cpu', pdf_path="output.pdf", N=0):
     total_loss = 0.0
     total_psnr = 0.0
+    all_plot_titles = []
+    all_labels = []
+    all_inputs = []
+    all_callistos = []
+    all_predictions = []
     
     for batch_idx, batch in enumerate(val_loader):
         # Extract inputs and labels from the batch
-        inputs, callistos = batch['peach_mountain_spectrogram'].to(device), batch['callisto_spectrogram'].to(device)
-        
+        inputs, callistos = batch['peach_mountain_spectrogram'].cpu().numpy(), batch['callisto_spectrogram'].cpu().numpy()
+        titles, labels = batch['path'], batch['label']
         # Forward pass
         outputs = model(inputs, training=False)  # Disable training-specific operations like dropout
         
@@ -99,12 +141,42 @@ def validate_one_epoch(model, val_loader, criterion, device='cpu'):
         
         # Compute peak signal to noise ratio
         total_psnr += 10.0 * tf.math.log((2^32 - 1)**2 / loss) / tf.math.log(10.0)
+
+        inputs = np.array(inputs)
+        callistos = np.array(callistos)
+        
+        for i, idx in enumerate(titles):
+            all_plot_titles.append(titles[i])
+
+        for i, idx in enumerate(labels):
+            all_labels.append(labels[i])
+            
+        all_inputs.append(inputs)
+        all_callistos.append(callistos)
+        all_predictions.append(outputs)
+        all_labels.append(labels)
     
     # Compute average loss and psnr
     avg_val_loss = total_loss / len(val_loader)
     avg_val_psnr = total_psnr / len(val_loader)
 
     print(f"Validation Loss: {avg_val_loss:.4f}, Validation Average PSNR: {avg_val_psnr:.2f}dB")
+
+    # Sample N random indices
+    all_inputs = np.concatenate(all_inputs, axis=0)
+    all_callistos = np.concatenate(all_callistos, axis=0)
+    all_predictions = np.concatenate(all_predictions, axis=0)
+    total_samples = all_inputs.shape[0]
+    if N > 0:
+        sample_indices = np.random.choice(total_samples, N, replace=False)
+    else:
+        sample_indices = []
+
+    # Plot and save sampled datapoints
+    with PdfPages(pdf_path) as pdf:
+        for i, idx in enumerate(sample_indices):
+            plot_sample(all_plot_titles[idx], all_inputs[idx], all_callistos[idx], all_predictions[idx], all_labels[idx], pdf)
+
     return avg_val_loss, avg_val_psnr
 
 def train_one_epoch(model, train_loader, criterion, optimizer, device='cpu'):    
@@ -181,7 +253,11 @@ def train(args):
         print(f"Epoch {epoch}/{max_epoch}, Train Loss: {train_loss:.4f}")
 
         if epoch % n_valid == 0:
-            val_loss, val_psnr = validate_one_epoch(model, val_loader, criterion, device)
+            dirname, basename = os.path.split(args['valid_output_pdf_path'])  # Split into directory and filename
+            name, ext = os.path.splitext(basename)  # Separate name and extension
+            new_filename = f"{name}_epoch_{epoch}{ext}"  # Insert epoch number
+            output_path = os.path.join(dirname, new_filename)
+            val_loss, val_psnr = validate_one_epoch(model, val_loader, criterion, device, pdf_path=output_path, N=args['valid_print_num_samples'])
 
         if epoch % n_ckpt == 0:
             save_checkpoint(ckpt_path, epoch, model, optimizer, train_loss, val_loss, val_psnr)

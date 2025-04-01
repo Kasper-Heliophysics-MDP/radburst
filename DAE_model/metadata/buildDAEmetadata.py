@@ -27,9 +27,9 @@ if(0):
     append_spectrogram_size(metadata_path, metadata_path, zips)
 
 #get a random sample
-if(0):
-    sample_path = 'DAE_model/metadata/DAEmetadata_MSE_sample.csv'
-    sample_metadata(metadata_path, sample_path, 20)
+if(1):
+    sample_path = 'DAE_model/metadata/DAEmetadata_MSE_factor10.csv'
+    sample_metadata(metadata_path, sample_path, 10)
 
 #filter out broken files
 if(0):
