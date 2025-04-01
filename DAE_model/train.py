@@ -130,6 +130,10 @@ def train(args):
     if args['resize_t'] and args['resize_f']:
         resize_arg = (args['resize_t'], args['resize_f'])
 
+    preprocess_steps = None
+    if args['preprocess'] == 'standardize':
+        preprocess_steps = transforms.Compose([prep.stan_rows_remove_verts])
+
     # Create dataset using settings from config file
     dataset = Dataset(
         data_dir = args['data_path'],
@@ -138,6 +142,8 @@ def train(args):
         cache_folder = args['cache_path'],
         resize = resize_arg,
         scaler = True,
+        preprocess = preprocess_steps,
+        verbose = args['verbose'],
     )
 
     device = '/GPU:0' if tf.config.list_physical_devices('GPU') else '/CPU:0'
@@ -177,7 +183,7 @@ def train(args):
         if epoch % n_valid == 0:
             val_loss, val_psnr = validate_one_epoch(model, val_loader, criterion, device)
 
-        if epoch & n_ckpt == 0:
+        if epoch % n_ckpt == 0:
             save_checkpoint(ckpt_path, epoch, model, optimizer, train_loss, val_loss, val_psnr)
 
 

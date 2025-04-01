@@ -119,12 +119,28 @@ class Dataset(TorchDataset):
                 if self.verbose:
                     print(f"File downloaded and saved to: {cached_file_path}") 
 
-            with gzip.open(cached_file_path, "rb") as gz_file:
-                decompressed_data = BytesIO(gz_file.read())
-                with fits.open(decompressed_data) as hdul:
-                    if self.verbose:
-                        hdul.info()  # Display FITS file structure
-                    spectrogram_arr_callisto = hdul[0].data  # Access primary data (numpy array)
+            try:
+                with gzip.open(cached_file_path, "rb") as gz_file:
+                    decompressed_data = BytesIO(gz_file.read())
+                    with fits.open(decompressed_data) as hdul:
+                        if self.verbose:
+                            hdul.info()  # Display FITS file structure
+                        spectrogram_arr_callisto = hdul[0].data  # Access primary data (numpy array)
+            except Exception as e:
+                if self.verbose:
+                    print(f"Downloading: {url}") 
+
+                response = requests.get(url, stream=True)
+
+                if self.verbose:
+                    response.raise_for_status()  # Raise an error if the download fails
+
+                with gzip.open(BytesIO(response.content), "rb") as gz_file:
+                    decompressed_data = BytesIO(gz_file.read())
+                    with fits.open(decompressed_data) as hdul:
+                        if self.verbose:
+                            hdul.info()  # Display FITS file structure
+                        spectrogram_arr_callisto = hdul[0].data  # Access primary data (numpy array)
         else:
             response = requests.get(url, stream=True)
 
@@ -163,7 +179,7 @@ class Dataset(TorchDataset):
         spectrogram_arr = spectrogram_arr.permute(1, 2, 0)
         spectrogram_arr_callisto = spectrogram_arr_callisto.permute(1, 2, 0)
 
-        return {"peach_mountain_spectrogram": spectrogram_arr, "callisto_spectrogram": spectrogram_arr_callisto, "path": self.labels_df['filename'].iloc[idx], "datetime": self.labels_df['datetime'].iloc[idx]}
+        return {"peach_mountain_spectrogram": spectrogram_arr, "callisto_spectrogram": spectrogram_arr_callisto, "path": self.labels_df['filename'].iloc[idx], "datetime": self.labels_df['datetime'].iloc[idx], "label": self.labels_df['burst_type'].iloc[idx]}
     
 
     def __len__(self):

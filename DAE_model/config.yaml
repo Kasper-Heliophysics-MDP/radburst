@@ -1,25 +1,28 @@
 default:
   #where is the data and labels located
   data_path: ['data/FITfiles-20250205T173408Z-001.zip', 'data/FITfiles-20250205T173408Z-002.zip', 'data/FITfiles-20250205T173408Z-003.zip']
-  labels_path: 'DAE_model/metadata/small_test.csv'
+  labels_path: 'DAE_model/metadata/DAEmetadata_MSE_sample.csv'
   cache_path: 'DAE_model/eCallisto_data_cache' #where to save downloaded eCallisto files
   
+  preprocess: null
   resize_t: 128
   resize_f: 128
+  verbose: False #debugging statements in the dataset
   batch_size: 32
   lr: 0.0005
   pos_weight: 1.3 
   max_epoch: 50
-  validate_every_n_steps: 1
+  validate_every_n_steps: 5
 
   
   get_data_from_zip: True # Do you have all data saved to your hard drive or did you just download the zip file
 
   #where to save the model checkpoint
-  checkpoint_every_n_steps: 1
-  load_from_checkpoint: True
+  checkpoint_every_n_steps: 5
+  load_from_checkpoint: False
   checkpoint_directory: 'DAE_model/checkpoints/'
 
   #evaluation
   eval_output_pdf_path: "DAE_Model/evaluation_output.pdf"
-  eval_num_samples: 11
+  unsized_eval_output_pdf_path: "DAE_Model/unsized_evaluation_output.pdf"
+  eval_num_samples: 25
