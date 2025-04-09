@@ -7,7 +7,7 @@ from matplotlib.backends.backend_pdf import PdfPages
 import tensorflow as tf
 from dataset.dataset import Dataset
 import yaml
-from models.DAE_tf import build_denoising_autoencoder
+from models.DAE_tf_vert import build_denoising_autoencoder
 from train import load_checkpoint
 import sys
 import os
@@ -142,7 +142,11 @@ def plot_unsized(model, dataset, n_samples=0, pdf_filename="output_unsized.pdf",
             
             resized_input = skimage.transform.resize(input.numpy(), resize_arg).squeeze()
             resized_input = np.expand_dims(resized_input, axis=(0, -1))
-            prediction = model(resized_input, training=False)
+            min_val = np.min(resized_input)
+            max_val = np.max(resized_input)
+            normalized_input = (resized_input - min_val) / (max_val - min_val + 1e-8)
+            model_input = prep.stan_rows_remove_verts(normalized_input)
+            prediction = model(model_input, training=False)
             plot_sample(title, input, callisto, prediction, label, pdf)
 
     print(f"Plots saved to {pdf_filename}")
@@ -164,9 +168,7 @@ if __name__ == "__main__":
     if args['resize_t'] and args['resize_f']:
         resize_arg = (args['resize_t'], args['resize_f'])
 
-    preprocess_steps = None
-    if args['preprocess'] == 'standardize':
-        preprocess_steps = transforms.Compose([prep.stan_rows_remove_verts])
+    
 
     # Plot the data keeping the input and callisto data the original size in the plots
     unsized_dataset = Dataset(
@@ -175,8 +177,8 @@ if __name__ == "__main__":
         zip = args['get_data_from_zip'],
         cache_folder = args['cache_path'],
         resize = None,
-        preprocess = preprocess_steps,
-        scaler = True,
+        preprocess = False,
+        scaler = False,
         verbose = args['verbose']
     )
     
@@ -190,8 +192,8 @@ if __name__ == "__main__":
         zip = args['get_data_from_zip'],
         cache_folder = args['cache_path'],
         resize = resize_arg,
-        preprocess = preprocess_steps,
-        scaler = True,
+        preprocess = args['preprocess'],
+        scaler = args['use_scaler'],
         verbose = args['verbose']
     )
 

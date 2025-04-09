@@ -63,6 +63,20 @@ def init_metadata(outcsv, zips, labelcsv):
 
     df.to_csv(outcsv)
 
+def remove_nolinks(incsv, outcsv):
+    '''
+    If the link field is empty, you cannot train with that datum
+
+    Args:
+        incsv (str): Path to the input metadata CSV file 
+        outcsv (str): Path to the output CSV file after removing rows with no link field
+    '''
+    df = pd.read_csv(incsv)
+
+    # Drop rows where 'link' is NaN or just whitespace
+    df_cleaned = df[~(df['link'].isna() | (df['link'].str.strip() == ''))]
+    df_cleaned.to_csv(outcsv)
+
 def remove_broken_fits(incsv, outcsv, zips):
     '''
     Reads a CSV file containing filenames, attempts to extract and load FITS files 

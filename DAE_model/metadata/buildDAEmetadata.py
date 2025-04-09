@@ -6,7 +6,7 @@ from metautils import *
 # So, the if statements are set up to achieve a similar effect
 
 zips = ['data/FITfiles-20250205T173408Z-001.zip', 'data/FITfiles-20250205T173408Z-002.zip', 'data/FITfiles-20250205T173408Z-003.zip']
-metadata_path = 'DAE_model/metadata/DAEmetadata_MSE.csv'
+metadata_path = 'DAE_model/metadata/DAEmetadata_Alaska_sample.csv'
 
 #make the csv
 if(0):
@@ -27,10 +27,14 @@ if(0):
     append_spectrogram_size(metadata_path, metadata_path, zips)
 
 #get a random sample
-if(1):
-    sample_path = 'DAE_model/metadata/DAEmetadata_MSE_factor10.csv'
-    sample_metadata(metadata_path, sample_path, 10)
+if(0):
+    sample_path = 'DAE_model/metadata/DAEmetadata_Alaska_sample.csv'
+    sample_metadata(metadata_path, sample_path, 5)
 
-#filter out broken files
+#filter out broken peach mountain files
 if(0):
     remove_broken_fits(metadata_path, metadata_path, zips)
+
+#filter out data pieces with no callisto link
+if(1):
+    remove_nolinks(metadata_path, metadata_path)

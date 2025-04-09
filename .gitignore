@@ -4,3 +4,5 @@ radburst.egg-info/
 site/
 .ipynb_checkpoints/
 data/FITfiles*
+DAE_model/checkpoints/*
+DAE_model/eCallisto_data_cache/*

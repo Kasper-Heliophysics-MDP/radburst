@@ -1,5 +1,5 @@
 from torchvision import transforms as transforms
-from models.DAE_tf import build_denoising_autoencoder
+from models.DAE_tf_vert import build_denoising_autoencoder
 import numpy as np
 import torch
 import tensorflow as tf
@@ -202,9 +202,6 @@ def train(args):
     if args['resize_t'] and args['resize_f']:
         resize_arg = (args['resize_t'], args['resize_f'])
 
-    preprocess_steps = None
-    if args['preprocess'] == 'standardize':
-        preprocess_steps = transforms.Compose([prep.stan_rows_remove_verts])
 
     # Create dataset using settings from config file
     dataset = Dataset(
@@ -213,8 +210,8 @@ def train(args):
         zip = args['get_data_from_zip'],
         cache_folder = args['cache_path'],
         resize = resize_arg,
-        scaler = True,
-        preprocess = preprocess_steps,
+        scaler = args['use_scaler'],
+        preprocess = args['preprocess'],
         verbose = args['verbose'],
     )
 

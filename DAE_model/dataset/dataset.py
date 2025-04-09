@@ -19,7 +19,7 @@ import utils.preprocessing as prep
 class Dataset(TorchDataset):
     """Dataset class to manage loading, storing and processing data."""
     
-    def __init__(self, data_dir, labels, cache_folder=None, preprocess=None, binary=True, zip=False, resize=None, scaler=False, verbose=False):
+    def __init__(self, data_dir, labels, cache_folder=None, preprocess=False, binary=True, zip=False, resize=None, scaler=False, verbose=False):
         """Intialize the dataset.
         
         Args:
@@ -154,10 +154,7 @@ class Dataset(TorchDataset):
                         hdul.info()  # Display FITS file structure
                     spectrogram_arr_callisto = hdul[0].data  # Access primary data (numpy array)
 
-        # Preprocess
-        if self.preprocess:
-            spectrogram_arr = self.preprocess(spectrogram_arr)
-            spectrogram_arr_callisto = self.preprocess(spectrogram_arr_callisto)
+        
 
         # Resize
         if self.resize:
@@ -170,6 +167,13 @@ class Dataset(TorchDataset):
             m = MinMaxNormalize()
             spectrogram_arr = m(spectrogram_arr)
             spectrogram_arr_callisto = m(spectrogram_arr_callisto)
+
+        # Preprocess
+        if self.preprocess:
+            spectrogram_arr = prep.stan_rows_remove_verts(spectrogram_arr)
+            #spectrogram_arr = prep.blur(spectrogram_arr)
+            #spectrogram_arr_callisto = prep.stan_rows_remove_verts(spectrogram_arr_callisto)
+            #spectrogram_arr_callisto = prep.blur(spectrogram_arr_callisto)
 
         # Convert to tensor
         spectrogram_arr = torch.tensor(spectrogram_arr, dtype=torch.float32).unsqueeze(0)
